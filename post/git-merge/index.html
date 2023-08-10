@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="zh-cn">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='https://jiwonkkang.github.io/css/light.css' />
     <link rel="stylesheet" href='https://jiwonkkang.github.io/css/dark.css' />
     <link rel="stylesheet" href='https://jiwonkkang.github.io/css/syntax.css' />
-    <title>[Git] Merge vs Squash vs Rebase - My New Hugo Site</title>
+    <title>[Git] Merge vs Squash vs Rebase - MeiK&#39;s blog</title>
     
     <link rel="icon" type="image/x-icon" href='https://jiwonkkang.github.io/images/favicon.ico'>
     
@@ -26,7 +26,7 @@
 
 
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="[Git] Merge vs Squash vs Rebase - My New Hugo Site" />
+<meta name="twitter:title" content="[Git] Merge vs Squash vs Rebase - MeiK&#39;s blog" />
 <meta name="twitter:description"
   content="Git 다양한 Merge 방법" />
 <meta name="twitter:site" content="https://jiwonkkang.github.io/" />
@@ -36,7 +36,7 @@
 
 
 <meta property="og:type" content="article" />
-<meta property="og:title" content="[Git] Merge vs Squash vs Rebase - My New Hugo Site">
+<meta property="og:title" content="[Git] Merge vs Squash vs Rebase - MeiK&#39;s blog">
 <meta property="og:description"
   content="Git 다양한 Merge 방법" />
 <meta property="og:url" content="https://jiwonkkang.github.io/post/git-merge/" />
@@ -139,7 +139,7 @@
               <div class="d-flex flex-column">
                 <h1 class="break-word f3 text-normal mb-md-0 mb-1">
                   <span class="author">
-                    <a href="https://jiwonkkang.github.io/"></a></span><span
+                    <a href="https://jiwonkkang.github.io/">JiwonKKang</a></span><span
                     class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
                       href="https://jiwonkkang.github.io/post/git-merge/">[Git] Merge vs Squash vs Rebase</a></strong>
                 </h1>
@@ -148,6 +148,11 @@
                     class="no-wrap">
                     Thu, 10 Aug 2023 10:52:24 &#43;0900</relative-time>
 
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Thu, 10 Aug 2023 14:17:10 &#43;0900"
+                    class="no-wrap">
+                    Thu, 10 Aug 2023 14:17:10 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -203,18 +208,18 @@
 <p><img src="https://hudi.blog/static/a3d00e849c58ba5bb2f31078ad9f2387/ac7a9/squash-merge.png" alt="">
 Squash는 여러개의 커밋을 하나의 커밋으로 합치는 것을 의미한다. Squash Merge는 병합할 브랜치의 모든 커밋을 하나의 커밋으로 Squash한 새로운 커밋을 Base 브랜치에 추가하는 방식으로 병합하는 것을 의미한다.</p>
 <p>Squash를 하게 되면 모든 커밋 이력이 하나의 커밋으로 합쳐지며 사라진다는 점을 주의해야한다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git checkout main
-</span></span><span style="display:flex;"><span>$ git merge --squash my-branch
-</span></span><span style="display:flex;"><span>$ git commit -m <span style="color:#e6db74">&#34;squash &amp; merge&#34;</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git checkout main
+</span></span><span class="line"><span class="cl">$ git merge --squash my-branch
+</span></span><span class="line"><span class="cl">$ git commit -m <span class="s2">&#34;squash &amp; merge&#34;</span>
 </span></span></code></pre></div><h1 id="rebase--merge">Rebase &amp; Merge</h1>
 <p><img src="https://hudi.blog/static/b0070becd572dd5c7151309e2e96767f/ac7a9/rebase-merge.png" alt="">
 Rebase를 알아보기 전에 Base가 무엇인지 알아보자. <strong><code>my-branch</code></strong> 가 <strong><code>main</code></strong> 브랜치의 A 커밋에서 분기되었다고 하자. 이때, <strong><code>my-branch</code></strong> 의 Base는 A 커밋이다.</p>
 <p>그렇다면, Rebase는 무엇일까? 말 그대로 Base를 다시 설정한다는 의미이다. 그럼 Base를 어디로 다시 설정할까? <strong><code>my-branch</code></strong> 가 분기된 <strong><code>main</code></strong> 브랜치의 최신 커밋이다.</p>
 <p>Rebase를 하면 커밋들의 Base가 변경되므로 Commit Hash 또한 변경 될 수 있다. 이로 인해 Force Push를 해야할 경우도 있으니 주의하자.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git checkout my-branch
-</span></span><span style="display:flex;"><span>$ git rebase main
-</span></span><span style="display:flex;"><span>$ git checkout main
-</span></span><span style="display:flex;"><span>$ git merge my-branch
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git checkout my-branch
+</span></span><span class="line"><span class="cl">$ git rebase main
+</span></span><span class="line"><span class="cl">$ git checkout main
+</span></span><span class="line"><span class="cl">$ git merge my-branch
 </span></span></code></pre></div><p>명령 순서를 보면 알겠지만, 결과적으로 Fast-Forward Merge를 사용하는 것을 확인할 수 있다.</p>
 <h2 id="어떨때-사용해야할까">어떨때 사용해야할까?</h2>
 <!-- raw HTML omitted -->
@@ -240,6 +245,24 @@ Rebase를 알아보기 전에 Base가 무엇인지 알아보자. <strong><code>
 </div>
 <script type="application/javascript" src='https://jiwonkkang.github.io/js/toc.js'></script>
 <link rel="stylesheet" href='https://jiwonkkang.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://jiwonkkang.github.io/css/gitalk.css'>
+<script src='https://jiwonkkang.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '5a1c911a3bb5ff14fe5e',
+    clientSecret: '8586a43d9a15967e4760ef333ef31eab72c6d3ea',
+    repo: 'jiwonkkang.github.io',
+    owner: 'JiwonKKang',
+    admin: ['JiwonKKang'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
 
 
   <div class="footer container-xl width-full p-responsive">
