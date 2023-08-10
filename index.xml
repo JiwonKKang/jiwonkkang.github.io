@@ -6,14 +6,16 @@
     <description>Recent content on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 Aug 2023 10:03:15 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 10 Aug 2023 10:52:24 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[Git] Merge vs Squash vs Rebase</title>
-      <link>https://jiwonkkang.github.io/post/title/</link>
-      <pubDate>Thu, 10 Aug 2023 10:03:15 +0900</pubDate>
+      <link>https://jiwonkkang.github.io/post/git-merge/</link>
+      <pubDate>Thu, 10 Aug 2023 10:52:24 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/title/</guid>
-      <description>다양한 Merge 방법 </description>
+      <guid>https://jiwonkkang.github.io/post/git-merge/</guid>
+      <description>#git
+Merge(Fast-Forward) 새로운 브랜치 my-branch 가 main 브랜치로부터 분기된 이후 main 브랜치에 새로운 커밋이 올라오지 않았다면, my-branch 가 main 와 비교하여 최신의 브랜치라고 할 수 있다. 이런 경우 my-branch 의 변경 이력을 그대로 main 으로 가져올 수 있는데, 이를 Fast-Forward Merge 라고 한다.
+Merge(Recursive) my-branch 가 main 브랜치에서 분기되고, main 브랜치에 새로운 커밋이 생겼다면, my-branch 를 최신이라고 간주할 수 없다. 따라서 my-branch 와 main 을 공통 부모로 한 새로운 Merge Commit 을 생성하게된다.</description>
     </item>
     
   </channel>
