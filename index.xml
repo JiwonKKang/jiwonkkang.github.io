@@ -6,7 +6,16 @@
     <description>Recent content on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 Aug 2023 10:52:24 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 10 Aug 2023 12:08:53 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>sadf</title>
+      <link>https://jiwonkkang.github.io/post/asdasdf/</link>
+      <pubDate>Thu, 10 Aug 2023 12:08:53 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/asdasdf/</guid>
+      <description>asdf</description>
+    </item>
+    
     <item>
       <title>[Git] Merge vs Squash vs Rebase</title>
       <link>https://jiwonkkang.github.io/post/git-merge/</link>
@@ -14,15 +23,6 @@
       
       <guid>https://jiwonkkang.github.io/post/git-merge/</guid>
       <description>Git 다양한 Merge 방법</description>
-    </item>
-    
-    <item>
-      <title>Test</title>
-      <link>https://jiwonkkang.github.io/post/test/</link>
-      <pubDate>Thu, 10 Aug 2023 10:52:24 +0900</pubDate>
-      
-      <guid>https://jiwonkkang.github.io/post/test/</guid>
-      <description>Test</description>
     </item>
     
   </channel>
