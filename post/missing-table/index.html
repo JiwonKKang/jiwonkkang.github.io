@@ -150,9 +150,9 @@
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Thu, 10 Aug 2023 19:18:35 &#43;0900"
+                  Modified <relative-time datetime="Thu, 10 Aug 2023 19:22:28 &#43;0900"
                     class="no-wrap">
-                    Thu, 10 Aug 2023 19:18:35 &#43;0900</relative-time>
+                    Thu, 10 Aug 2023 19:22:28 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -182,7 +182,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      261 Words
+                      260 Words
                     
 
                   </div>
@@ -230,17 +230,23 @@ ddl-auto 를 validate 옵션으로 설정해놓아서 schema validation 이 진�
 그런데</p>
 <pre tabindex="0"><code>.... Schema-validation: missing table [direction]
 </code></pre><p>같은 에러가 발생한다.</p>
-<p>컨테이너에 접속해 확인해보았지만 분명 direction 테이블을 존재했다.</p>
+<p>컨테이너에 접속해 확인해보았지만 분명 direction 테이블은 존재했다.</p>
 <hr>
 <h4 id="원인">원인</h4>
-<p>-MySQL 기본 설정으로 테이블을 대소문자 구분하여 검사
--DB이름이 소문자인데, hibernate가 자꾸 대문자로 바꿔서 조회
-&ndash; 그 이유는 Hibernate가 MySQL 의 <code>@@lower_case_table_names</code> 의 설정을 따라가기 때문이다</p>
+<ul>
+<li>MySQL 기본 설정으로 테이블을 대소문자 구분하여 검사</li>
+<li>DB이름이 소문자인데, hibernate가 자꾸 대문자로 바꿔서 조회</li>
+<li>그 이유는 Hibernate가 MySQL 의 <code>@@lower_case_table_names</code> 의 설정을 따라가기 때문이다</li>
+</ul>
 <h3 id="문제해결">문제해결</h3>
-<p>mysql의 설정파일(/etc/mysql/conf.d)을 수정</p>
+<blockquote>
+<p><em>mysql의 설정파일(/etc/mysql/conf.d)을 수정)</em></p>
+</blockquote>
 <p>나의 경우 Volume 옵션을 통해 컨테이너에 마운트했기떄문에 프로젝트 폴더의 마운트로 설정한 cnf파일 수정</p>
 <pre tabindex="0"><code>[mysqld] lower_case_table_names = 1
-</code></pre></article>
+</code></pre><blockquote>
+</blockquote>
+</article>
               </div>
             </div>
           </div>
