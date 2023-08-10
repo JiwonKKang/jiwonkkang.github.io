@@ -18,9 +18,7 @@
 
     
     <meta name="description"
-  content="#git
-Merge(Fast-Forward) 새로운 브랜치 my-branch 가 main 브랜치로부터 분기된 이후 main 브랜치에 새로운 커밋이 올라오지 않았다면, my-branch 가 main 와 비교하여 최신의 브랜치라고 할 수 있다. 이런 경우 my-branch 의 변경 이력을 그대로 main 으로 가져올 수 있는데, 이를 Fast-Forward Merge 라고 한다.
-Merge(Recursive) my-branch 가 main 브랜치에서 분기되고, main 브랜치에 새로운 커밋이 생겼다면, my-branch 를 최신이라고 간주할 수 없다. 따라서 my-branch 와 main 을 공통 부모로 한 새로운 Merge Commit 을 생성하게된다." />
+  content="Git 다양한 Merge 방법" />
 <meta name="keywords"
   content='' />
 <meta name="robots" content="noodp" />
@@ -30,9 +28,7 @@ Merge(Recursive) my-branch 가 main 브랜치에서 분기되고, main 브�
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="[Git] Merge vs Squash vs Rebase - My New Hugo Site" />
 <meta name="twitter:description"
-  content="#git
-Merge(Fast-Forward) 새로운 브랜치 my-branch 가 main 브랜치로부터 분기된 이후 main 브랜치에 새로운 커밋이 올라오지 않았다면, my-branch 가 main 와 비교하여 최신의 브랜치라고 할 수 있다. 이런 경우 my-branch 의 변경 이력을 그대로 main 으로 가져올 수 있는데, 이를 Fast-Forward Merge 라고 한다.
-Merge(Recursive) my-branch 가 main 브랜치에서 분기되고, main 브랜치에 새로운 커밋이 생겼다면, my-branch 를 최신이라고 간주할 수 없다. 따라서 my-branch 와 main 을 공통 부모로 한 새로운 Merge Commit 을 생성하게된다." />
+  content="Git 다양한 Merge 방법" />
 <meta name="twitter:site" content="https://jiwonkkang.github.io/" />
 <meta name="twitter:creator" content="" />
 <meta name="twitter:image"
@@ -42,9 +38,7 @@ Merge(Recursive) my-branch 가 main 브랜치에서 분기되고, main 브�
 <meta property="og:type" content="article" />
 <meta property="og:title" content="[Git] Merge vs Squash vs Rebase - My New Hugo Site">
 <meta property="og:description"
-  content="#git
-Merge(Fast-Forward) 새로운 브랜치 my-branch 가 main 브랜치로부터 분기된 이후 main 브랜치에 새로운 커밋이 올라오지 않았다면, my-branch 가 main 와 비교하여 최신의 브랜치라고 할 수 있다. 이런 경우 my-branch 의 변경 이력을 그대로 main 으로 가져올 수 있는데, 이를 Fast-Forward Merge 라고 한다.
-Merge(Recursive) my-branch 가 main 브랜치에서 분기되고, main 브랜치에 새로운 커밋이 생겼다면, my-branch 를 최신이라고 간주할 수 없다. 따라서 my-branch 와 main 을 공통 부모로 한 새로운 Merge Commit 을 생성하게된다." />
+  content="Git 다양한 Merge 방법" />
 <meta property="og:url" content="https://jiwonkkang.github.io/post/git-merge/" />
 <meta property="og:site_name" content="[Git] Merge vs Squash vs Rebase" />
 <meta property="og:image"
@@ -183,7 +177,7 @@ Merge(Recursive) my-branch 가 main 브랜치에서 분기되고, main 브�
                         </div>
                       </div>
                     </details-menu>
-                      866 Words
+                      873 Words
                     
 
                   </div>
@@ -196,6 +190,8 @@ Merge(Recursive) my-branch 가 main 브랜치에서 분기되고, main 브�
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg"><p>#git</p>
+<h1 id="git-다양한-merge-방법">Git 다양한 Merge 방법</h1>
+<!-- raw HTML omitted -->
 <h1 id="mergefast-forward">Merge(Fast-Forward)</h1>
 <p><img src="https://hudi.blog/static/f2116265ae12bf9d745ec4991962b70e/ac7a9/fast-forward-merge.png" alt="fast">
 새로운 브랜치 <strong><code>my-branch</code></strong> 가 <strong><code>main</code></strong> 브랜치로부터 분기된 이후 <strong><code>main</code></strong> 브랜치에 새로운 커밋이 올라오지 않았다면, <strong><code>my-branch</code></strong> 가 <strong><code>main</code></strong> 와 비교하여 최신의 브랜치라고 할 수 있다. 이런 경우 <strong><code>my-branch</code></strong> 의 변경 이력을 그대로 <strong><code>main</code></strong> 으로 가져올 수 있는데, 이를 Fast-Forward Merge 라고 한다.</p>
