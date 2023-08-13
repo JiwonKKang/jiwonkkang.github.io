@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Jiwon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Sat, 12 Aug 2023 23:26:47 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Aug 2023 18:47:40 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>도커 컨테이너로 배포중 삽질</title>
+      <link>https://jiwonkkang.github.io/post/deploy-docker/</link>
+      <pubDate>Sun, 13 Aug 2023 18:47:40 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/deploy-docker/</guid>
+      <description>도커 컨테이너로 서버 배포중에 에러들</description>
+    </item>
+    
     <item>
       <title>SpringBoot에서 Redis를 적용해보자</title>
       <link>https://jiwonkkang.github.io/post/java-redis/</link>

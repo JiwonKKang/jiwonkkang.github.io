@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Error on Jiwon&#39;s blog</title>
+    <title>error on Jiwon&#39;s blog</title>
     <link>https://jiwonkkang.github.io/tags/error/</link>
-    <description>Recent content in Error on Jiwon&#39;s blog</description>
+    <description>Recent content in error on Jiwon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Thu, 10 Aug 2023 20:12:58 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/error/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Aug 2023 18:47:40 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/error/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>도커 컨테이너로 배포중 삽질</title>
+      <link>https://jiwonkkang.github.io/post/deploy-docker/</link>
+      <pubDate>Sun, 13 Aug 2023 18:47:40 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/deploy-docker/</guid>
+      <description>도커 컨테이너로 서버 배포중에 에러들</description>
+    </item>
+    
     <item>
       <title>SpringBoot css 깨짐현상</title>
       <link>https://jiwonkkang.github.io/post/spring-boot-css-error/</link>
