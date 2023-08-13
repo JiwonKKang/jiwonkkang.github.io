@@ -159,9 +159,9 @@
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sun, 13 Aug 2023 02:46:14 &#43;0900"
+                  Modified <relative-time datetime="Sun, 13 Aug 2023 22:14:10 &#43;0900"
                     class="no-wrap">
-                    Sun, 13 Aug 2023 02:46:14 &#43;0900</relative-time>
+                    Sun, 13 Aug 2023 22:14:10 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -191,7 +191,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      1383 Words
+                      1762 Words
                     
 
                   </div>
@@ -243,6 +243,75 @@ ANSI C로 만들어져있으며, 모든 데이터셋을 메모리내에 읽어�
 <p>Redis가 데이터 영속화를 하는 방법 스냅샷을 찍어 정기적으로 데이터베이스의 내용을 디스크에 쓴다.</p>
 <p>따라서 Redis를 재기동하게되면 이 파일로부터 데이터를 불러와 복원시킨다. 일정횟수, 일정 간격으로 디스크에 파일을 쓴다.</p>
 <p>파일의 쓰기 타이밍은 설정파일, config 커맨드로 설정 가능하다.</p>
+<blockquote>
+<h1 id="redis-구조">Redis 구조</h1>
+</blockquote>
+<h2 id="stand-alone">Stand Alone</h2>
+<p><img src="https://blog.octo.com/wp-content/uploads/2017/08/screen-shot-2017-08-11-at-14-34-30.png" alt=""></p>
+<p>기본적인 Redis 1개로만 구성된 구조입니다.</p>
+<h2 id="master---slavereplica">Master - Slave(Replica)</h2>
+<p><img src="https://cdn.educba.com/academy/wp-content/uploads/2022/11/Redis-Master-Slave..jpg" alt=""></p>
+<p>Redis Master 1개의 여러개의 Redis Slave로 구성할수 있습니다.
+Redis Slave는 Redis Mater와 계속하여 데이터를 싱크합니다.</p>
+<p>기본적으로 Redis Slave는 read만 지원하게됩니다.</p>
+<p>Redis Master 장애시 Fail Over 대처가 어렵습니다.(할순 있습니다.)</p>
+<h2 id="sentinel">Sentinel</h2>
+<p><img src="https://t1.daumcdn.net/cfile/tistory/995CB7335A02B5D102" alt=""></p>
+<p>Redis Sentinel은 Redis 서버에 대한 상태를 감시합니다.
+Redis Master에 장애가 발생할 경우 Redis Slave를 Redis Master로 자동으로 변경하여 Fail Over에 대처합니다.</p>
+<h2 id="cluster">Cluster</h2>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F47nR9%2Fbtq4bCW6z5w%2FrgvB2GyckL8LCjXWtDHpV0%2Fimg.png" alt=""></p>
+<p>Sentinel 구조 처럼 서로 통신하며 장애시에 Mater와 Slave를 전환 할 수 있습니다.</p>
+<p>또한 데이터 샤딩을 통해 임의로 데이터셋을 나누어서 저장하기때문에 성능면으로도 좋습니다.</p>
+<!-- raw HTML omitted -->
+<pre tabindex="0"><code>Availability : Cluster &gt;= Sentinel &gt; Master-Replica &gt; SA
+
+Performance : Cluster &gt; Sentinel &gt; Master-Replica &gt; SA
+
+Efficiency : SA &gt; Master-Replica &gt;= Sentinel &gt; Cluster
+</code></pre><!-- raw HTML omitted -->
+<blockquote>
+<h1 id="memcached와의-차이점">MemCached와의 차이점</h1>
+</blockquote>
+<!-- raw HTML omitted -->
+<ol>
+<li>DataType
+<ul>
+<li>Redis : Hash, List, Set, Sorted Set, Geo, String</li>
+<li>Memcached : String</li>
+</ul>
+</li>
+<li>Thread
+<ul>
+<li>Redis : Single Thread</li>
+<li>Memcached : Multi Thread</li>
+</ul>
+</li>
+<li>Scale
+<ul>
+<li>Redis : ScaleOut</li>
+<li>Memcached : Scale Up</li>
+</ul>
+</li>
+<li>Memory Policy
+<ul>
+<li>Redis : no eviction, volatile-lue, volatile-ttl, allkey-random</li>
+<li>Memcached : LRU</li>
+</ul>
+</li>
+<li>Persistence
+<ul>
+<li>Redis : AOF, RDB</li>
+<li>Memcached : None</li>
+</ul>
+</li>
+<li>ETC
+<ul>
+<li>Redis : LUA Script</li>
+</ul>
+</li>
+</ol>
+<!-- raw HTML omitted -->
 <blockquote>
 <h1 id="springboot에서-redis-적용">SpringBoot에서 Redis 적용</h1>
 </blockquote>
