@@ -6,7 +6,16 @@
     <description>Recent content on Jiwon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Sun, 13 Aug 2023 18:47:40 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 14 Aug 2023 09:58:26 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>컨테이너 배포를 위한 AWS EC2 환경 세팅</title>
+      <link>https://jiwonkkang.github.io/post/ec2-docker-config/</link>
+      <pubDate>Mon, 14 Aug 2023 09:58:26 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/ec2-docker-config/</guid>
+      <description>프로젝트 배포를위해 EC2 콘솔에 배포환경을 세팅해보자</description>
+    </item>
+    
     <item>
       <title>도커 컨테이너로 배포중 삽질</title>
       <link>https://jiwonkkang.github.io/post/deploy-docker/</link>
