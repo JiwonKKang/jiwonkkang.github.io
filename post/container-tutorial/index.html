@@ -159,9 +159,9 @@
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 16 Aug 2023 20:58:40 &#43;0900"
+                  Modified <relative-time datetime="Wed, 16 Aug 2023 21:23:58 &#43;0900"
                     class="no-wrap">
-                    Wed, 16 Aug 2023 20:58:40 &#43;0900</relative-time>
+                    Wed, 16 Aug 2023 21:23:58 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -191,7 +191,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      8545 Words
+                      8546 Words
                     
 
                   </div>
@@ -287,7 +287,7 @@
 </ol>
 <p>지금까지 컨테이너를 생성하기 위해 run, create, start 명령어를 사용</p>
 <p>run 명령은 pull, create, start명령어를 일괄적으로 실행한 후 attach가 가능한 컨테이너라면 컨테이너 내부로 들어갑니다.</p>
-<p>하지만 create 명령어는 도커 이밎를 pull한 후에 컨테이너를 생성만 할 뿐 start attach를 실행하지는 않습니다.</p>
+<p>하지만 create 명령어는 도커 이미지를 pull한 후에 컨테이너를 생성만 할 뿐 start attach를 실행하지는 않습니다.</p>
 <p>보통은 생성과 동시에 실행시키기 때문에 run을 주로 씁니다.</p>
 <p><img src="https://island-primula-917.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fc8c2b5c7-28a8-4e39-91ff-76cb3ee13d55%2FUntitled.png?table=block&amp;id=cbe4c36f-d2eb-4d4f-b503-507be348c8a2&amp;spaceId=9bc99f35-edf4-4599-af44-3f7fb94b56cd&amp;width=2000&amp;userId=&amp;cache=v2" alt="Untitled"></p>
 <h1 id="컨테이너-목록-확인">컨테이너 목록 확인</h1>
@@ -961,7 +961,7 @@
 <p>전부 같음</p>
 <p><img src="/images/container-tutorial/57.png" alt="Untitled"></p>
 <h3 id="브리지-네트워크와-net-alias">브리지 네트워크와 —net-alias</h3>
-<p>특정 호스트 이름으로 컨테이너 여러개이 접근 가능</p>
+<p>특정 호스트 이름으로 컨테이너 여러개에 접근 가능</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker run -itd --name network_alias_container1 <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">--net mybridge <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">--net-alias lotte <span class="se">\\</span>
