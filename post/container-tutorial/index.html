@@ -159,9 +159,9 @@
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 16 Aug 2023 20:21:10 &#43;0900"
+                  Modified <relative-time datetime="Wed, 16 Aug 2023 20:58:40 &#43;0900"
                     class="no-wrap">
-                    Wed, 16 Aug 2023 20:21:10 &#43;0900</relative-time>
+                    Wed, 16 Aug 2023 20:58:40 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -191,7 +191,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      9268 Words
+                      8545 Words
                     
 
                   </div>
@@ -508,19 +508,19 @@
 <p>full id 중에 앞의 12자리만 표시됩니다.</p>
 <p>full id는 docker inspect 명령으로 확인이 가능합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker inspect mycentos <span class="p">|</span> grep Id
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f135a39b-4b48-4a9f-beca-0f81f98fd112/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="https://island-primula-917.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff135a39b-4b48-4a9f-beca-0f81f98fd112%2FUntitled.png?table=block&amp;id=0b651fd7-e9fb-4dc6-b13b-ed7f41a0c465&amp;spaceId=9bc99f35-edf4-4599-af44-3f7fb94b56cd&amp;width=2000&amp;userId=&amp;cache=v2" alt="Untitled"></p>
 <h3 id="image">IMAGE</h3>
 <p>컨테이너를 생성할 때 사용된 이미지의 이름입니다.</p>
 <h3 id="command">COMMAND</h3>
 <p>COMMAND는 컨테이너가 시작될 떄 실행할 명령어 커맨드는 대부분의 이미지에 미리 내장돼있기 때문에 별도로 설정할 필요는 없습니다. 위에서 생성한 centos:7, ubuntu:18.04 이미지에는 /bin/bash라는 커맨드가 내장되어 있지 때문에 컨테이너를 생성할 때 별도의 커맨드를 설정하지 않았습니다. 컨테이너가 시작될 때 /bin/bash 명령이 실행됐으므로 상호 입출력이 가능한 쉘 환경을 사용할 수 있었습니다.</p>
 <p>이미지에 내장된 커맨드는 docker run이나 create 명령어의 맨 끝에 입력해서 컨테이너를 생성할 때 덮어쓸 수 있습니다. 예를 들어, 아래의 docker run 명령어로 생성되는 컨테이너는 실행될 때마다 echo hello world를 실행합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker run -it ubuntu:18.04 <span class="nb">echo</span> <span class="s2">&#34;hello world!&#34;</span>
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d8e62bf4-b7d1-4dec-a166-cd7b73bd9c8d/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="https://island-primula-917.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fd8e62bf4-b7d1-4dec-a166-cd7b73bd9c8d%2FUntitled.png?table=block&amp;id=131485db-7120-49c6-b92f-0b729b8828ae&amp;spaceId=9bc99f35-edf4-4599-af44-3f7fb94b56cd&amp;width=2000&amp;userId=&amp;cache=v2" alt="Untitled"></p>
 <p>그러나 위 명령으로 생성된 컨테이너는 ubuntu:18.04에 내장된 /bin/bash command를 덮어쓰기 때문에 상호입출력이 가능한 쉘이 실행되지 않아 &ldquo;hello world!&ldquo;만 실행되고 컨테이너 종료</p>
 <h3 id="name">NAME</h3>
 <p>컨테이너의 고유한 이름입니다. 컨테이너를 생성할 때 —name 옵션으로 이름을 설정하지 않은 경우 도커엔진이 임의로 형용사와 명사를 무작위로 조합해 이름을 설정하기 때문에 ubuntu 컨테이너의 이름이 예시에서는 sweet_pascal로 설정되어 있습니다. ID와 마찬가지로 고유해야 하며 중복되면 안되지만 docker rename 명령으로 변경은 가능합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker rename jolly_benz my_ubuntu1804
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/60d49fed-bb24-4a85-a293-ce6361e2d41c/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/1.png" alt="Untitled"></p>
 <h1 id="컨테이너-삭제">컨테이너 삭제</h1>
 <p>더 이상 사용하지 않는 컨테이너를 삭제할 때는 docker rm 명령어 사용</p>
 <p>한번 삭제한 컨테이너는 복구할 수 없으므로 삭제할 때는 신중을 기해야 합니다.</p>
@@ -529,10 +529,10 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker rm sweet_pascal
 </span></span></code></pre></div><p>컨테이너가 삭제됐는지 확인하려면 docker ps -a 명령을 입력합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker ps -a
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b11ee4ac-a8e2-4961-a1fe-3a3e5c814304/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/2.png" alt="Untitled"></p>
 <p>이번에는 mycentos 컨테이너를 삭제합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker rm mycentos
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a19190e9-20bf-44f4-913a-89242fd320f9/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/3.png" alt="Untitled"></p>
 <p>에러가 났네요?!</p>
 <p>실행 중인 컨테이너는 삭제할 수 없으므로</p>
 <ol>
@@ -546,13 +546,13 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker rm -f mycentos
 </span></span></code></pre></div></li>
 </ol>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2baffdfe-4fcc-4f7d-b62f-4350b4d655b8/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/4.png" alt="Untitled"></p>
 <p>돌리고 던져놓은 컨테이너가 너무나 많아 일일히 삭제하기가 귀찮다면</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker container prune
 </span></span></code></pre></div><p>진짜로 다 지울거냐를 물어봅니다.</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8e3bc1b1-84d3-4be3-b193-e926bb466f7b/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/5.png" alt="Untitled"></p>
 <p>y를 입력하면 다 지워집니다.</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/18dac34a-4e8f-4f9c-a125-b51c8d1656ee/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/6.png" alt="Untitled"></p>
 <p>docker ps 명령의 -a와 -q 옵션을 조합해 삭제</p>
 <p>-q 옵션 : ID만 출력</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker ps -a -q
@@ -566,7 +566,7 @@
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@6f0c1e0f544b:/# apt update
 </span></span><span class="line"><span class="cl">root@6f0c1e0f544b:/# apt install net-tools
 </span></span><span class="line"><span class="cl">root@6f0c1e0f544b:/# ifconfig
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4e094310-17ac-4534-8b60-b73e1d612a92/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/7.png" alt="Untitled"></p>
 <p>docker의 NAT IP인 172.17.0.2를 할당받은 eth0 인터페이스와 로컬 호스트인 lo인터페이스가 있습니다.</p>
 <p>아무런 설정을 하지 않았다면 이 컨테이너는 외부에서 접근이 불가능 - 해당 docker 가 설치된 host만 가능</p>
 <p>외부에 컨테이너의 에플리케이션을 노출하기 위해서는 eth0의 IP와 port를 호스트의 IP와 port에 바인딩해야 합니다.</p>
@@ -581,15 +581,15 @@
 </span></span><span class="line"><span class="cl">root@1f22a7d7162d:/# apt install nginx
 </span></span><span class="line"><span class="cl">root@1f22a7d7162d:/# service nginx start
 </span></span><span class="line"><span class="cl">root@1f22a7d7162d:/# service nginx status
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4f0c548c-0c53-48bd-b091-94de88f72198/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/8.png" alt="Untitled"></p>
 <p>GCP compute engine vm의 외부 ip로 접속하면 아래와 같은 화면이 보입니다.</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/12e9bd19-927d-4f64-9575-b953b4525aff/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/9.png" alt="Untitled"></p>
 <p>그런데 이런식으로 Docker를 쓰면 Docker를 쓰는 의미가 딱히 없죠?</p>
 <p>이번엔 apache 웹서버 이미지를 바로 실행해보겠습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker run --name my-apache-server -p 8080:80 httpd
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e1ea45de-b16f-40b4-bff9-454478ec3fb8/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/10.png" alt="Untitled"></p>
 <p>이제 8080포트로 접속해보겠습니다.</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4c45af73-09b7-4219-97fa-05ab63e48c58/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/11.png" alt="Untitled"></p>
 <p>엇 접속이 안됩니다. ㅠㅠ</p>
 <ul>
 <li>
@@ -599,11 +599,9 @@
 <ol>
 <li>
 <p>방화벽 메뉴로 들어갑니다.</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4d8dec52-2559-4e11-935f-13e280887b61/Untitled.png" alt="Untitled"></p>
 </li>
 <li>
 <p>방화벽 규칙 만들기 버튼을 누릅니다.</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3bac158c-ab7c-4ba9-b127-0c00bedfe822/Untitled.png" alt="Untitled"></p>
 </li>
 <li>
 <p>방화벽 규칙의 정보들을 입력한 후 만들기 버튼을 누릅니다.</p>
@@ -614,18 +612,17 @@
 <li>소스 IPv4 범위 : 0.0.0.0/0 (모두)</li>
 <li>프로토콜 및 포트 : TCP - 8080</li>
 </ul>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/14340281-5a48-4a06-85a7-7c91bd8960e6/Untitled.png" alt="Untitled"></p>
 </li>
 </ol>
 </li>
 </ul>
 <p>접속이 되는 것을 볼 수 있습니다.</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ae0c3f37-0b2a-4a43-a0e7-2486599f9635/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/12.png" alt="Untitled"></p>
 <p>호스트의 IP의 port를 컨테이너의 IP와 port로 연결한다는 개념은 매우 중요합니다.</p>
 <p>아파치 웹서버는 172 대역을 가진 컨테이너의 NAT IP의 80번 포트로 서비스하므로 여기에 접근하려면 172.17.0.x:80의 주소로 접근해야 합니다.</p>
 <p>그러나 docker의 port-forward 옵션인 -p를 써서 호스트와 컨테이너를 연결했으므로 호스트의 IP와 포트를 통해 172.17.0.x.:80으로 접근할 수 있습니다.</p>
 <p>순서를 정리하면 다름과 같습니다.</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/637421de-ca22-4d30-b906-e984f2eb4019/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/13.png" alt="Untitled"></p>
 <p>그러나 다음같이 -p 80:81로 입력했다면 외부에서 웹 서버에 접근하지 못합니다.</p>
 <p>호스트의 80번 포트가 forward하는 컨테이너의 포트는 81이고 81에서는 아무일도 일어나지 않습니다.</p>
 <h1 id="컨테이너-application-구축">컨테이너 application 구축</h1>
@@ -657,9 +654,9 @@
 </ol>
 <p>docker ps 명령 결과의 PORTS 컬럼을 확인해보겠습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker ps
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/38329444-8662-4052-8df7-5a1ae83ee7c1/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/14.png" alt="Untitled"></p>
 <p>이 예제에서는 호스트의 32768번 포트와 연결했습니다. 따라서 호스트이 IP와 32768번 포트로 워드프레스 웹 서버에 접근할 수 있습니다. 웹 브라우저로 [호스트 IP]:32768에 접근했을 때 다음과 같은 화면이 나타나면 워드프레스 컨테이너가 성공적으로 생성된 것입니다.</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/70da4d6c-b1ce-4e6d-a115-7aa572552632/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/15.png" alt="Untitled"></p>
 <h3 id="sudo-docker-run의--d---e-link-옵션">sudo docker run의 -d , -e, —link 옵션</h3>
 <p>-d 옵션</p>
 <ul>
@@ -688,10 +685,10 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="si">${</span><span class="nv">ENV_NAME</span><span class="si">}</span>
 </span></span></code></pre></div><p>이걸 확인하려면 컨테이너의 쉘을 사용해야 하는데 mysql과 wordpress는 attach 명령은 의미가 없습니다.</p>
 <p>attach 쓰면 그냥 log만 나옵니다.</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5d258bd2-7d63-44a0-b962-5e56bc3942a0/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/16.png" alt="Untitled"></p>
 <p>그래서 exec 명령으로 컨테이너 내부의 bash쉘을 실행시켜야 합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker <span class="nb">exec</span> -it wordpressdb /bin/bash
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f95c1550-fbf7-49a1-bb39-8cba1f7d1af2/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/17.png" alt="Untitled"></p>
 </li>
 </ul>
 <p>—link 옵션</p>
@@ -716,10 +713,10 @@
 <p>실행 순서의 의존성도 정의</p>
 <p>wordpress, wordpressdb 모두 컨테이너 중지를 합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker stop wordpress wordpressdb
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0a2b8814-de18-4233-87c5-da89cb9bfb0c/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/18.png" alt="Untitled"></p>
 <p>그리고 wordpress를 다시 실행시키면</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker start wordpress
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f933f193-5a79-4eed-9ea5-a0eed1bdb7d9/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/19.png" alt="Untitled"></p>
 <p>에러가 납니다.</p>
 </li>
 <li>
@@ -732,7 +729,7 @@
 <h1 id="도커-볼륨">도커 볼륨</h1>
 <p>도커 이미지로 컨태이너를 생성하면 이미지는 readonly이 되며 컨테이너의 변경 사항만 별도로 저장해서 각 컨테이너의 정보를 보존</p>
 <p>위에서 생성했던 mysql 컨테이너는 mysql:5.7이라는 이미지로 생성됐지만 워드프레스 블로그를 위한 DB등의 정보는 컨테이너가 갖고 있습니다.</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0294b4e0-c687-4300-93e0-9d92d4d5d834/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/20.png" alt="Untitled"></p>
 <p>이미 생성된 이미지는 어떠한 경우로도 변경되지 않으며, 컨테이너 계층에 원래 이미지에서 변경된 파일시스템 등을 저장합니다. 이미지에 mysql을 실행하는 데 필요한 애플리케이션 파일이 들어있다면 컨테이너 계층에는 워드프레스에서 쓴 로그인 정보나 게시글 등과 같이 데이터베이스를 운용하면서 쌓이는 데이터가 저장</p>
 <h3 id="컨테이너-레이어의-치명적-문제">컨테이너 레이어의 치명적 문제</h3>
 <p>이미지로 빌드시 너무나 많은 변경사항이 일어났기 때문에 레이어가 과도하게 쌓임</p>
@@ -770,9 +767,9 @@
 </span></span><span class="line"><span class="cl">sudo docker rm wordpressdb_hostvolume wordpress_hostvolume
 </span></span></code></pre></div><p>다시 ~/wordpress_db 디렉토리를 확인</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ls ~/wordpress_db/
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b7c8d83e-aac7-4c46-a471-5445897196b7/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/21.png" alt="Untitled"></p>
 <p>~/wordpress_db:/var/lib/mysql 이 둘은 동기화 되는 개념이 아니라 그냥 같은 디렉토리</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/add07d52-d802-42e1-8ab9-5e73557252f0/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/22.png" alt="Untitled"></p>
 <p>디렉토리 뿐만 아니라 단일 파일도 가능, 여러개의 -v 옵션도</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> hello &gt;&gt; ~/hello <span class="o">&amp;&amp;</span> <span class="nb">echo</span> hello2 &gt;&gt; ~/hello2
 </span></span><span class="line"><span class="cl">sudo docker run -it --name file_volume <span class="se">\\</span>
@@ -780,7 +777,7 @@
 </span></span><span class="line"><span class="cl">-v ~/hello2:/hello2 <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">ubuntu:20.04
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@2b574c6896cc:/# cat hello <span class="o">&amp;&amp;</span> cat hello2
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0de9cb42-93ba-4453-b138-5ae918122cdf/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/23.png" alt="Untitled"></p>
 <p>원래 호스트에는 ~/wordpress_db 디렉토리가 존재하지 않았음</p>
 <p>-v 옵션을 사용함으로써 호스트에 ~/wordpress_db 디렉토리 생성, 파일 공유</p>
 <p>⇒ 컨테이너의 파일이 호스트로 복사</p>
@@ -791,7 +788,7 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker run -it --name volume_dummy <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">alicek106/volume_test <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">ls /home/testdir_2/
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ae38b24f-2fd7-44f8-8b51-b82d8ea9cd82/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/24.png" alt="Untitled"></p>
 </li>
 <li>
 <p>이제 -v 옵션을 사용해서 컨테이너를 생성</p>
@@ -799,7 +796,7 @@
 </span></span><span class="line"><span class="cl">-v ~/wordpress_db:/home/testdir_2 <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">alicek106/volume_test <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">ls /home/testdir_2/
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/87a51a7f-8df7-44a0-be23-8501d307c3b1/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/25.png" alt="Untitled"></p>
 </li>
 </ol>
 <p>공유한 컨테이너 디렉토리자체가 호스트의 디렉토리 내용으로 덮어씌워짐</p>
@@ -812,135 +809,17 @@
 </span></span><span class="line"><span class="cl">--volumes-from volume_overide <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">ubuntu:20.04 <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">ls /home/testdir_2
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3b686bd6-29af-4a4d-8dc1-584889e01a7f/Untitled.png" alt="Untitled"></p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a47b7974-b393-4267-b222-f705c2f9ce05/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/26.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/27.png" alt="Untitled"></p>
 <h2 id="도커볼륨">도커볼륨</h2>
 <p>도커 자체에서 제공하는 볼륨 기능을 활용해 데이터를 보존</p>
 <p>볼륨을 다루는 명령어는 docker volume</p>
 <h3 id="생성">생성</h3>
 <p>다음 명령으로 도커 볼륨을 생성합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker volume create --name myvolume
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/601da179-6314-4dac-a942-6cbd4d1576b5/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/28.png" alt="Untitled"></p>
 <p>플러그인 드라이버를 설정해 여러 종류의 스토리지 백엔드를 쓸 수 있지만 여기서는 기본적으로 제공되는 드라이버인 local을 사용</p>
 <p>이 볼륨은 로컬호스트에 저장되며 도커엔진에 의해 생성되고 삭제</p>
-<ul>
-<li><strong>Volume plugins</strong>
-<table>
-<thead>
-<tr>
-<th>Plugin</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://github.com/Azure/azurefile-dockervolumedriver">https://github.com/Azure/azurefile-dockervolumedriver</a></td>
-<td>Lets you mount Microsoft <a href="https://azure.microsoft.com/blog/azure-file-storage-now-generally-available/">https://azure.microsoft.com/blog/azure-file-storage-now-generally-available/</a> shares to Docker containers as volumes using the SMB 3.0 protocol. <a href="https://azure.microsoft.com/blog/persistent-docker-volumes-with-azure-file-storage/">https://azure.microsoft.com/blog/persistent-docker-volumes-with-azure-file-storage/</a>.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/RedCoolBeans/docker-volume-beegfs">https://github.com/RedCoolBeans/docker-volume-beegfs</a></td>
-<td>An open source volume plugin to create persistent volumes in a BeeGFS parallel file system.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/blockbridge/blockbridge-docker-volume">https://github.com/blockbridge/blockbridge-docker-volume</a></td>
-<td>A volume plugin that provides access to an extensible set of container-based persistent storage options. It supports single and multi-host Docker environments with features that include tenant isolation, automated provisioning, encryption, secure deletion, snapshots and QoS.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/contiv/volplugin">https://github.com/contiv/volplugin</a></td>
-<td>An open source volume plugin that provides multi-tenant, persistent, distributed storage with intent based consumption. It has support for Ceph and NFS.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/rancher/convoy">https://github.com/rancher/convoy</a></td>
-<td>A volume plugin for a variety of storage back-ends including device mapper and NFS. It’s a simple standalone executable written in Go and provides the framework to support vendor-specific extensions such as snapshots, backups and restore.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/omallo/docker-volume-plugin-dostorage">https://github.com/omallo/docker-volume-plugin-dostorage</a></td>
-<td>Integrates DigitalOcean’s <a href="https://www.digitalocean.com/products/storage/">https://www.digitalocean.com/products/storage/</a> into the Docker ecosystem by automatically attaching a given block storage volume to a DigitalOcean droplet and making the contents of the volume available to Docker containers running on that droplet.</td>
-</tr>
-<tr>
-<td><a href="https://www.drbd.org/en/supported-projects/docker">https://www.drbd.org/en/supported-projects/docker</a></td>
-<td>A volume plugin that provides highly available storage replicated by <a href="https://www.drbd.org/">https://www.drbd.org/</a>. Data written to the docker volume is replicated in a cluster of DRBD nodes.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/ScatterHQ/flocker">https://github.com/ScatterHQ/flocker</a></td>
-<td>A volume plugin that provides multi-host portable volumes for Docker, enabling you to run databases and other stateful containers and move them around across a cluster of machines.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/openstack/fuxi">https://github.com/openstack/fuxi</a></td>
-<td>A volume plugin that is developed as part of the OpenStack Kuryr project and implements the Docker volume plugin API by utilizing Cinder, the OpenStack block storage service.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/mcuadros/gce-docker">https://github.com/mcuadros/gce-docker</a></td>
-<td>A volume plugin able to attach, format and mount Google Compute <a href="https://cloud.google.com/compute/docs/disks/persistent-disks">https://cloud.google.com/compute/docs/disks/persistent-disks</a>.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/calavera/docker-volume-glusterfs">https://github.com/calavera/docker-volume-glusterfs</a></td>
-<td>A volume plugin that provides multi-host volumes management for Docker using GlusterFS.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/muthu-r/horcrux">https://github.com/muthu-r/horcrux</a></td>
-<td>A volume plugin that allows on-demand, version controlled access to your data. Horcrux is an open-source plugin, written in Go, and supports SCP, <a href="https://www.minio.io/">https://www.minio.io/</a> and Amazon S3.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/hpe-storage/python-hpedockerplugin/">https://github.com/hpe-storage/python-hpedockerplugin/</a></td>
-<td>A volume plugin that supports HPE 3Par and StoreVirtual iSCSI storage arrays.</td>
-</tr>
-<tr>
-<td><a href="https://infinit.sh/documentation/docker/volume-plugin">https://infinit.sh/documentation/docker/volume-plugin</a></td>
-<td>A volume plugin that makes it easy to mount and manage Infinit volumes using Docker.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/vdemeester/docker-volume-ipfs">https://github.com/vdemeester/docker-volume-ipfs</a></td>
-<td>An open source volume plugin that allows using an <a href="https://ipfs.io/">https://ipfs.io/</a> filesystem as a volume.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/calavera/docker-volume-keywhiz">https://github.com/calavera/docker-volume-keywhiz</a></td>
-<td>A plugin that provides credentials and secret management using Keywhiz as a central repository.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/CWSpear/local-persist">https://github.com/CWSpear/local-persist</a></td>
-<td>A volume plugin that extends the default local driver’s functionality by allowing you specify a mountpoint anywhere on the host, which enables the files to always persist, even if the volume is removed via docker volume rm.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/NetApp/netappdvp">https://github.com/NetApp/netappdvp</a> (nDVP)</td>
-<td>A volume plugin that provides direct integration with the Docker ecosystem for the NetApp storage portfolio. The nDVP package supports the provisioning and management of storage resources from the storage platform to Docker hosts, with a robust framework for adding additional platforms in the future.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/ContainX/docker-volume-netshare">https://github.com/ContainX/docker-volume-netshare</a></td>
-<td>A volume plugin that provides volume management for NFS 3/4, AWS EFS and CIFS file systems.</td>
-</tr>
-<tr>
-<td><a href="https://scod.hpedev.io/docker_volume_plugins/hpe_nimble_storage/index.html">https://scod.hpedev.io/docker_volume_plugins/hpe_nimble_storage/index.html</a></td>
-<td>A volume plug-in that integrates with Nimble Storage Unified Flash Fabric arrays. The plug-in abstracts array volume capabilities to the Docker administrator to allow self-provisioning of secure multi-tenant volumes and clones.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/libopenstorage/openstorage">https://github.com/libopenstorage/openstorage</a></td>
-<td>A cluster-aware volume plugin that provides volume management for file and block storage solutions. It implements a vendor neutral specification for implementing extensions such as CoS, encryption, and snapshots. It has example drivers based on FUSE, NFS, NBD and EBS to name a few.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/portworx/px-dev">https://github.com/portworx/px-dev</a></td>
-<td>A volume plugin that turns any server into a scale-out converged compute/storage node, providing container granular storage and highly available volumes across any node, using a shared-nothing storage backend that works with any docker scheduler.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/quobyte/docker-volume">https://github.com/quobyte/docker-volume</a></td>
-<td>A volume plugin that connects Docker to <a href="https://www.quobyte.com/containers%E2%80%99s">https://www.quobyte.com/containers’s</a> data center file system, a general-purpose scalable and fault-tolerant storage platform.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/emccode/rexray">https://github.com/emccode/rexray</a></td>
-<td>A volume plugin which is written in Go and provides advanced storage functionality for many platforms including VirtualBox, EC2, Google Compute Engine, OpenStack, and EMC.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/virtuozzo/docker-volume-ploop">https://github.com/virtuozzo/docker-volume-ploop</a></td>
-<td>A volume plugin with support for Virtuozzo Storage distributed cloud file system as well as ploop devices.</td>
-</tr>
-<tr>
-<td><a href="https://github.com/vmware/docker-volume-vsphere">https://github.com/vmware/docker-volume-vsphere</a></td>
-<td>Docker Volume Driver for vSphere enables customers to address persistent storage requirements for Docker containers in vSphere environments.</td>
-</tr>
-</tbody>
-</table>
-</li>
-</ul>
 <h3 id="해당-볼륨을-쓰는-컨테이너-생성">해당 볼륨을 쓰는 컨테이너 생성</h3>
 <p>여기서 -v 옵션에는 [볼륨이름]:[컨테이너 공유 디렉토리] 이런식으로 입력합니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker run -it --name myvolume_1 <span class="se">\\</span>
@@ -953,17 +832,17 @@
 </span></span><span class="line"><span class="cl">-v myvolume:/root/ <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">ubuntu:20.04 <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">cat /root/volume
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d2ab3d8f-7e81-4216-96f6-e2cfb47212e7/Untitled.png" alt="Untitled"></p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d2013fd1-581f-4845-85ed-ba48b3787bc2/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/29.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/30.png" alt="Untitled"></p>
 <p>볼륨은 디렉토리 하나에 상응하는 단위로서 docker engine에서 관리</p>
 <p>도커 볼륨도 호스트 볼륨 공유와 마찬가지로 호스트에 저장함으로써 데이터를 보존하지만 파일이 실제로 어디에 저장되는지 사용자는 알 필요가 없습니다.</p>
 <h3 id="볼륨-세부정보">볼륨 세부정보</h3>
 <p>다음 명령으로 볼륨이 실제로 어디에 저장되었는지를 알 수 있습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker inspect --type volume myvolume
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ea28449c-3050-40e2-aaae-f4814b716ef7/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/31.png" alt="Untitled"></p>
 <p>해당 디렉토리를 뒤져보도록 하겠습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo ls /mnt/storage/docker/volumes/myvolume/_data
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9fd239ed-e8e5-4785-b6a2-1e658840c1fd/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/32.png" alt="Untitled"></p>
 <h3 id="볼륨-자동-생성">볼륨 자동 생성</h3>
 <p>-v 옵션에서 공유할 디렉토리 위치를만 입력하면 해당 디렉토리에 대한 볼륨을 자동으로 생성</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker run -it --name volume_auto <span class="se">\\</span>
@@ -971,23 +850,23 @@
 </span></span><span class="line"><span class="cl">ubuntu:20.04
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@ada4230050e3:/# <span class="nb">exit</span>
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker volume ls
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d33be0da-26b3-488d-ab86-ade5d04247cf/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/33.png" alt="Untitled"></p>
 <p>어떤 볼륨에 마운트 되었는지 확인하기 위해 docker inspect로 확인</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker inspect
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f050bc58-de70-44eb-9ca8-ece56dd6b7bd/Untitled.png" alt="Untitled"></p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f1347a6d-455f-459e-9064-b2f96733d90e/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/34.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/35.png" alt="Untitled"></p>
 <h3 id="불필요한-volume-삭제">불필요한 volume 삭제</h3>
 <p>컨테이너는 삭제해도 볼륨은 남아있기 때문에 불필요한 볼륨은 지워줘야 함</p>
 <p>사용하지 않는 볼륨은 한번에 지우는 명령은 다음과 같음</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker volume prune
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d4d821ee-e36b-42ad-8d5c-891a35923507/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/36.png" alt="Untitled"></p>
 <h3 id="mount-옵션">mount 옵션</h3>
 <p>-v 옵션 대신 사용 기능은 같지만 옵션주는 방식이 다름</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker run -it --name mount_option1 <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">--mount <span class="nv">type</span><span class="o">=</span>volume,source<span class="o">=</span>myvolume,target<span class="o">=</span>/root <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">ubuntu:20.04 <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">cat /root/volume
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/04c0e494-8828-4436-a650-68e4c33a956e/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/37.png" alt="Untitled"></p>
 <h1 id="도커-네트워크">도커 네트워크</h1>
 <h2 id="도커-네트워크-구조">도커 네트워크 구조</h2>
 <ul>
@@ -999,15 +878,15 @@
 </ul>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ifconfig가 없을경우 sudo apt install net-tools</span>
 </span></span><span class="line"><span class="cl">ifconfig
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b82e5323-4e86-4985-8ebd-577d1a1c004c/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/38.png" alt="Untitled"></p>
 <p>ens4 : GCP의 내부 IP 할당 - 실제로 외부와 통신이 가능한 호스트의 네트워크 인터페이스</p>
 <p>veth… : 컨테이너를 시작할 때 생성, 각 컨테이너의 eth0와 연결</p>
 <p>docker0 : bridge, 각 veth 인터페이스와 바인딩, 호스트의 ens4 인터페이스와 이어주는 역할</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8be00110-e94b-43c4-952b-07e6e0c93183/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/39.png" alt="Untitled"></p>
 <p>실제로 바인딩됐는지 확인</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># apt install bridge-utils</span>
 </span></span><span class="line"><span class="cl">brctl show docker0
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/25111ebe-879c-4d2b-b1c7-19e515c3aaf7/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/40.png" alt="Untitled"></p>
 <h2 id="도커-네트워크-기능">도커 네트워크 기능</h2>
 <ul>
 <li>기본적으로 docker0 bridge로 외부와 통신할 수 있는 환경 사용</li>
@@ -1015,11 +894,11 @@
 <li>자체 제공 드라이버 : bridge, host, none, container, overlay</li>
 </ul>
 <p>네트워크 목록 확인</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1987ac35-b063-49d4-b3ec-68fae96af187/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/41.png" alt="Untitled"></p>
 <h3 id="bridge-네트워크">bridge 네트워크</h3>
 <p>docker network inspect옵션으로 bridge 세부 정보 확인</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker network inspect bridge
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f178236c-5d02-400e-a50e-d2aedb0148a6/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/42.png" alt="Untitled"></p>
 <p>subnet : 172.17.0.0/16</p>
 <p>geteway : 172.17.0.1</p>
 <p>docker0가 아닌 새로운 bridge 타입의 네트워크 생성</p>
@@ -1028,26 +907,26 @@
 </span></span><span class="line"><span class="cl">--net mybridge <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">ubuntu:20.04
 </span></span><span class="line"><span class="cl">ifconfig
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0a921cd6-977d-4db2-b9f5-3088ec4d4799/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/43.png" alt="Untitled"></p>
 <p>disconnect/connect를 통해 컨테이너에 유동적으로 붙이고 뗄 수 있음</p>
 <p>단 특정 IP대역을 갖는 네트워크 모드에만 사용가능(bridge, overlay / host, none은 사용</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0b0b3ee4-5c1e-4305-9a0e-ca2dd1aaede6/Untitled.png" alt="Untitled"></p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/246883c1-bf98-47e0-8d26-fa4af4e0e0b1/Untitled.png" alt="Untitled"></p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5c2a04ad-0e64-4b60-a024-c7d6694ef54e/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/44.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/45.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/46.png" alt="Untitled"></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker network disconnect mybridge mynetwork_container
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e89c959c-3526-4252-bd35-27d08544abc3/Untitled.png" alt="Untitled"></p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/87ef9cbf-bad6-43e0-a1ef-c364c21b5d70/Untitled.png" alt="Untitled"></p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4a688a8c-8c82-467a-a907-c21a37e6f9ed/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/47.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/48.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/49.png" alt="Untitled"></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker network connect mybridge mynetwork_container
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e35be88f-4ec6-41ee-9b23-84ac023f9764/Untitled.png" alt="Untitled"></p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/374b7058-8ec0-4ec3-8a9a-5171acb57c67/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/50.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/51.png" alt="Untitled"></p>
 <p>subnet, gateway, ip range 옵션 추가</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker network create --driver<span class="o">=</span>bridge <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">--subnet<span class="o">=</span>172.72.0.0/16 <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">--ip-range<span class="o">=</span>172.72.0.0/24 <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">--gateway<span class="o">=</span>172.72.0.1 <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">my_custom_network
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9ec9bb2b-57dd-4318-8893-6d498271d972/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/52.png" alt="Untitled"></p>
 <h3 id="host-네트워크">host 네트워크</h3>
 <p>네트워크를 호스트로 하면 호스트의 네트워크 환경을 그대로 쓸 수 있음</p>
 <p>별도 생성 필요 없이 기존 host라는 이름의 네트워크 사용</p>
@@ -1057,7 +936,7 @@
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@instance-node-1:/# apt update
 </span></span><span class="line"><span class="cl">root@instance-node-1:/# apt install net-tools
 </span></span><span class="line"><span class="cl">root@instance-node-1:/# ifconfig
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/47caa766-6901-42a3-a21a-567b0d690dce/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/53.png" alt="Untitled"></p>
 <h3 id="none-네트워크">none 네트워크</h3>
 <p>아무런 네트워크를 쓰지 않는다는 것을 의미함</p>
 <p>외부와의 단절</p>
@@ -1065,7 +944,7 @@
 </span></span><span class="line"><span class="cl">--net none <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">ubuntu:14.04
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@9a20605c7941:/# ifconfig
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/206b28a8-f310-48a5-b215-98e8648ccf96/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/54.png" alt="Untitled"></p>
 <p>로컬호스트를 나타내는 lo 밖에 네트워크 인터페이스가 없음</p>
 <h3 id="container-네트워크">container 네트워크</h3>
 <p>—net 옵션으로 container를 입력하면 다른 컨테이너의 네트워크 네임스페이스 환경을 공유할 수 있음</p>
@@ -1077,10 +956,10 @@
 <p>network_container_2에 대한 모든 네트워크 설정은 network_container_1와 동일</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker <span class="nb">exec</span> network_container_1 ifconfig
 </span></span><span class="line"><span class="cl">sudo docker <span class="nb">exec</span> network_container_2 ifconfig
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d3d87b2a-8339-4cfb-9465-c8647c18268f/Untitled.png" alt="Untitled"></p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a0215015-8328-48c0-a617-01b4e90ae7df/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/55.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/56.png" alt="Untitled"></p>
 <p>전부 같음</p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/11672e8c-7fd9-4aa0-8744-8adac5abb607/Untitled.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/57.png" alt="Untitled"></p>
 <h3 id="브리지-네트워크와-net-alias">브리지 네트워크와 —net-alias</h3>
 <p>특정 호스트 이름으로 컨테이너 여러개이 접근 가능</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker run -itd --name network_alias_container1 <span class="se">\\</span>
@@ -1097,13 +976,13 @@
 </span></span><span class="line"><span class="cl">--net mybridge <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">--net-alias lotte <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">ubuntu:14.04
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7396643b-6cab-498e-adde-38a52c89dacc/Untitled.png" alt="Untitled"></p>
-<p>해당 호스트명으로 핑을 날려보겠습니다.</p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/58.png" alt="Untitled">
+해당 호스트명으로 핑을 날려보겠습니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker run -it --name network_alias_ping <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">--net mybridge <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">ubuntu:14.04
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@3c8727c3f274:/# ping -c <span class="m">1</span> lotte
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e4fada73-9145-4841-bb4c-f5ae08f6aa0e/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/59.png" alt="Untitled"></p>
 <p>컨테이너 3개의 IP로 각각 PING이 전송된 것을 확인</p>
 <p>round robin 방식</p>
 <p>도커 내장 DNS가 host 이름을 —net-alias 옵션으로 lotte를 설정한 컨테이너로 변환(resolve)하기 때문</p>
@@ -1111,7 +990,7 @@
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">root@3c8727c3f274:/# apt update
 </span></span><span class="line"><span class="cl">root@3c8727c3f274:/# apt install dnsutils
 </span></span><span class="line"><span class="cl">root@3c8727c3f274:/# dig lotte
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ee246e6d-891b-4e8b-ba7f-33f938a1aefe/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/60.png" alt="Untitled"></p>
 <h1 id="컨테이너-로깅">컨테이너 로깅</h1>
 <h2 id="json-file-로그-사용">json-file 로그 사용</h2>
 <p>컨테이너의 표준 출력과 에러로그를 별도의 메타데이터 파일로 저장하며 이를 확인하는 명령어를 제공</p>
@@ -1119,7 +998,7 @@
 </span></span><span class="line"><span class="cl">-e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="m">1234</span> <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">mysql:5.7
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker logs mysql
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/25d7d1df-82d5-4162-9e07-34b1d3ebd70c/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/61.png" alt="Untitled"></p>
 <p>-since : 특정시간 이후의 로그 확인 가능</p>
 <p>-f : 로그를 스트림으로 확인</p>
 <p>-t : 타임스탬프 표시</p>
@@ -1130,7 +1009,7 @@
 </span></span><span class="line"><span class="cl">ubuntu:14.04 <span class="se">\\</span>
 </span></span><span class="line"><span class="cl"><span class="nb">echo</span> syslogtest
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo tail /var/log/syslog
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f7cadbd8-b248-4990-8fee-1a1052651727/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/62.png" alt="Untitled"></p>
 <h1 id="컨테이너-자원-할당-제한">컨테이너 자원 할당 제한</h1>
 <h2 id="컨테이너-메모리-제한">컨테이너 메모리 제한</h2>
 <p>—memory 옵션 사용</p>
@@ -1140,7 +1019,7 @@
 </span></span><span class="line"><span class="cl">--name memory_1g <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">nginx
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker inspect memory_1g <span class="p">|</span>grep <span class="se">\\</span><span class="s2">&#34;Memory\\&#34;</span>
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/73997f96-3108-4ef9-9d60-e0c6bb927462/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/63.png" alt="Untitled"></p>
 <h2 id="컨테이너-cpu-제한">컨테이너 cpu 제한</h2>
 <p>—cpu-shares 옵션 사용</p>
 <p>CPU를 어느 비중만큼 나눠가질지에 대한 상대적인 비중 (디폴트 1024)</p>
@@ -1149,22 +1028,22 @@
 </span></span><span class="line"><span class="cl">alicek106/stress <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">stress --cpu <span class="m">1</span>
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ps aux <span class="p">|</span> grep stress
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a77a70ce-2118-4a09-811c-004f769405bd/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/64.png" alt="Untitled"></p>
 <p>—cpuset-cpus 호스트에 cpu가 여러개 있을 때 특정 cpu만 사용하도록 설정</p>
 <p>cpu 집중적 작업이 필요하다면 여러개의 cpu를 사용하도록 설정해 적절히 분배하는 것이 좋음</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker run -d --name cpuset_1 <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">--cpuset-cpus<span class="o">=</span><span class="m">1</span> <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">alicek106/stress <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">stress --cpu <span class="m">1</span>
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/968e13dc-3ce0-44b2-9b30-7a719e8f6825/Untitled.png" alt="Untitled"></p>
-<p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ba981f4b-6516-451a-a11e-3b9220bf9058/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/65.png" alt="Untitled"></p>
+<p><img src="/images/container-tutorial/66.png" alt="Untitled"></p>
 <p>—cpu-period : cpu주기 (기본 100000) —cpu-quota : period 중 cpu 스케줄링에 얼마나 할당할건지</p>
 <p>⇒ —cpus : —cpu-period, —cpu-quota와 기능적으로는 같음 하지만 좀 더 직관적 예) —cpu-period=100000 , —cpu-quota=50000 ⇒ —cpus=0.5</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker run -d --name cpus_container <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">--cpus<span class="o">=</span>0.5 <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">alicek106/stress <span class="se">\\</span>
 </span></span><span class="line"><span class="cl">stress --cpu <span class="m">1</span>
-</span></span></code></pre></div><p><img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d6cf1916-4041-4bd6-b6de-b2708be99936/Untitled.png" alt="Untitled"></p>
+</span></span></code></pre></div><p><img src="/images/container-tutorial/67.png" alt="Untitled"></p>
 <h2 id="컨테이너-block-io-제한">컨테이너 Block I/O 제한</h2>
 <p>하나의 컨테이너가 입출력을 과도하게 사용하지 않게 설정하기 위해</p>
 <p>—device-write-bps, —device-read-bps</p>
