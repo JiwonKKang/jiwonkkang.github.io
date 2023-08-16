@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://jiwonkkang.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/syntax.css' />
+    <title>[Docker] 유니온 파일 시스템 - Jiwon&#39;s blog</title>
+    
+    <link rel="icon" type="image/x-icon" href='https://jiwonkkang.github.io/images/favicon.ico'>
+    
+    <meta name="theme-color" content="#1e2327">
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RHFSNZ7DGH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RHFSNZ7DGH');
+</script>
+    
+    <meta name="description"
+  content="docker는 이미지를 어떻게 관리할까?" />
+<meta name="keywords"
+  content='' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jiwonkkang.github.io/post/docker-ufs/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="[Docker] 유니온 파일 시스템 - Jiwon&#39;s blog" />
+<meta name="twitter:description"
+  content="docker는 이미지를 어떻게 관리할까?" />
+<meta name="twitter:site" content="https://jiwonkkang.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://jiwonkkang.github.io/">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="[Docker] 유니온 파일 시스템 - Jiwon&#39;s blog">
+<meta property="og:description"
+  content="docker는 이미지를 어떻게 관리할까?" />
+<meta property="og:url" content="https://jiwonkkang.github.io/post/docker-ufs/" />
+<meta property="og:site_name" content="[Docker] 유니온 파일 시스템" />
+<meta property="og:image"
+  content="https://jiwonkkang.github.io/">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2023-08-16 11:51:28 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://jiwonkkang.github.io/">
+        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://jiwonkkang.github.io/">
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://jiwonkkang.github.io/">
+        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+          width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://jiwonkkang.github.io/">
+                  <img class=" avatar-user"
+                    src="https://jiwonkkang.github.io/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://jiwonkkang.github.io/">JiwonKKang</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://jiwonkkang.github.io/post/docker-ufs/">[Docker] 유니온 파일 시스템</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Wed, 16 Aug 2023 11:51:28 &#43;0900"
+                    class="no-wrap">
+                    Wed, 16 Aug 2023 11:51:28 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Wed, 16 Aug 2023 12:45:46 &#43;0900"
+                    class="no-wrap">
+                    Wed, 16 Aug 2023 12:45:46 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      4349 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/docker">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      docker
+                    </a>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><blockquote>
+<h1 id="유니온-파일-시스템ufs">유니온 파일 시스템(UFS)</h1>
+</blockquote>
+<p>일반적으로 우리가 파일시스템에 파일 등을 생성하면 그 파일의 크기를 쉽게 확인할 수 있다.<br>
+즉, 생성한 파일이 차지하는 스토리지 공간을 정확하게 확인할 수 있는 것이다.</p>
+<p>그런데, Docker 를 통해 기동한 Container 의 크기(스토리지 점유 크기)를 계산하려면 사실 약간 막막함이 있다.<br>
+서비스를 위해 Container 를 10 개를 기동하여 사용 중인데, 과연 이 Container 들이 디스크 공간을 얼마나 사용하고 있는건지 정확하게 계산할 수 있는가?</p>
+<p>오늘은 Container size 에 대한 얘기를 하려고 한다.</p>
+<p>Container size 를 정확하게 계산하려면 먼저 Docker 가 사용하는 Union File System(UFS)에 대해 이해해야 한다.<br>
+Union 은 사전적으로 &lsquo;연합&rsquo;, &lsquo;결합&rsquo;이라는 의미를 가지고 있다.<br>
+즉, UFS 라고 하면 File system 의 결합, 연합 정도로 생각하면 되겠다.<br>
+<strong>여러 개의 File system 을 하나로 결합하여 취급할 수 있도록 해주는 것</strong>이다.</p>
+<p>여러분은 Docker 에서 Image 와 Container 의 차이를 이미 이해하고 있을 것이다.<br>
+흔히 설명을 위해 Linux 의 Process 모델과 비교를 하게 된다.</p>
+<ul>
+<li>프로그램 Binary = Docker Image</li>
+<li>Process = Container</li>
+</ul>
+<p>Process 를 여러 번 실행하더라도 프로그램 Binary 는 변경되지 않는다.<br>
+즉, Process 가 기동 중에 내부에서 어떤 짓을 하더라도 Binary 자체가 변경되는 일은 없다.<br>
+또한, 다수의 Process 가 하나의 Binary 를 이용하여 기동될 수 있다.</p>
+<p>이러한 개념이 Docker 의 image 와 container 에서도 적용된다.<br>
+image 를 이용하여 container 를 다수 기동할 수 있지만 image 자체는 변경되지 않는다.<br>
+Container 를 이용하여 ubuntu 를 기동했다고 가정해보자.<br>
+Container 내부에서는 사용자가 마치 자신의 독립적인 ubuntu 와 파일시스템을 가진 양 자유롭게 사용할 수 있다.<br>
+즉, 신규 파일이나 디렉토리를 생성할 수도 있고, 기존에 존재하던 객체 들을 마음대로 변경할 수 있다.<br>
+하지만, Container 기동에 사용되는 image 는 변경되지 않는다고 말했다.<br>
+그렇다면 Container 내에서 변경한 내용들(파일 생성 등)은 어디에 저장되는 것일까?</p>
+<p>그 비밀이 UFS 에 있다.</p>
+<p><img src="https://miro.medium.com/max/1600/1*hZgRPWerZVbaGT8jJiJZVQ.jpeg" alt=""></p>
+<p>우리가 Container 내부에서 보는 File system 은 사실 UFS 라는 창을 통해서 보는 것과 같다.<br>
+그 내부에는 어떤 File system 으로 구성되어 있든지간에, 우리는 UFS 가 보여주는 방식에 따라 자신이 하나의 File system 을 독점하여 사용하는 것처럼 착각 속에서 사용하고 있는 것이다.<br>
+우리가 Container 내부에서 바라보는 File system 내부에는 사실 여러 개의 File system 이 겹쳐져 있는 상태이다.<br>
+마치 서로 다른 무늬가 그려진 투명 셀로판지 여러 개를 겹쳐보면 하나의 합쳐진 무늬처럼 보이듯이, UFS 는 하위의 다수 File system 을 투명으로 겹쳐서 사용자에게 하나처럼 보여주는 것이다.</p>
+<p>Container 는 Image 를 이용해서 기동된다.<br>
+그런데, 해당 Image 는 반드시 하나의 통 image 로만 구성되어 있지 않을 수도 있다.<br>
+맨 처음 ubuntu 라는 base image 를 이용하여 container 를 기동한 뒤, 사용자는 container 내 에서 emacs 나 apache 와 같은 프로그램을 추가로 설치할 수도 있을 것이다. (사용자 파일 생성도 마찬가지이다.)<br>
+만약 이 상태에서 container 를 중지하고 삭제하면, 설치했던 emacs 나 apache 는 함께 삭제되고 재 사용도 할 수 없다.<br>
+이를 방지하기 위해 사용자는 이러한 변경 상태를 그대로 image 로 만들어 둘 수 있다.<br>
+이후 사용자가 해당 image 를 사용해서 container 를 기동하면, 설치했던 emacs 나 apache 는 설치된 그대로 남아있게 된다.<br>
+이렇게 image 위에 변경을 가하고 이를 또 다시 image 로 만드는 것을 반복할 수 있다.<br>
+Docker 는 이러한 변경들을 image layer 라는 개념을 두어서 차곡차곡 쌓아놓는다.<br>
+svn 이나 git 같은 소스 관리 툴을 이용해본 사람은 이미 눈치를 챘겠지만, Docker 또한 image 의 변경 사항(Diff)을 하나하나 순차적으로 저장해두고, 사용자에게는 이를 원하는 layer 까지 합친 것으로 보여주는 것이다.</p>
+<p>특정 image 를 이용하여 container 를 기동한다는 것은, 이렇게 차곡차곡 쌓인 image layer 를 먼저 하단에 깔아두고(Read-Only Image Layer), 최종적으로 맨 위에 Container layer(Writable layer)를 얹은 후, 이 모든 layer 를 결합하여 사용자에게 하나의 File system view(root filesystem)로 제공하는 것이다.</p>
+<p><img src="https://docs.docker.com/storage/storagedriver/images/sharing-layers.jpg" alt=""></p>
+<p>container 를 기동할 때 사용했던 image 는 변경되지 않고 그대로 유지된다.<br>
+왜냐하면, Writable layer 는 Read-only layer 와 완전히 별개이니까.<br>
+(마치 Process 가 기동해서 뭔 짓을 해도 프로그램 binary 는 그대로인 것처럼)<br>
+다만, Diff 는 최 상단의 Writable layer 에 쌓이고 이는 container 제거 시 함께 삭제된다.<br>
+이러한 Diff 를 Persistent 하게 유지하고자 한다면 다음의 2 가지 방법을 이용해야 한다.</p>
+<ul>
+<li><strong>Container 상에서 변경을 수행한 후 image 로 만들어둔다.</strong></li>
+<li><strong><a href="https://medium.com/dtevangelist/docker-%EA%B8%B0%EB%B3%B8-5-8-volume%EC%9D%84-%ED%99%9C%EC%9A%A9%ED%95%9C-data-%EA%B4%80%EB%A6%AC-9a9ac1db978c">Volume</a>을 구성하여 변경사항은 해당 volume 에 저장하도록 한다.</strong></li>
+</ul>
+<p>관리적인 측면에서 보면 <strong>Image 의 변경은 없을수록 좋다</strong>.<br>
+그래야만, 반복적으로 같은 image 를 이용하여 container 를 구동할 수 있을 것이다.<br>
+따라서, 위의 첫 번째 방법처럼 변경이 발생할 때마다 또 다른 image 를 만드는 것은 관리 상 좋은 방법이 아니다.<br>
+두 번째 방법처럼 변경부분은 별도로 빼서 Volume 에 저장하는 것이 일반적으로 좋은 방법이라고 할 수 있다.</p>
+<p>자, 이제 image layer 와 UFS에 대해 이해를 했으니 Container size 를 계산해보자.<br>
+먼저 ubuntu:latest image 를 이용하여 container 하나를 기동한다.<br>
+ubuntu image 는 docker pull 을 통해 이미 local 에 저장한 상태라고 가정한다.</p>
+<p><img src="http://cloudrain21.com/wordpress/wp-content/uploads/2019/09/docker-ps.png" alt=""></p>
+<p>image 크기가 64.2 MB 이고, 이를 이용하여 container 를 기동하면 container size 또한 64.2 MB 인 것을 볼 수 있다.<br>
+Container size 는 다음의 두 가지 종류를 고려해야 한다.</p>
+<ul>
+<li><strong>virtual size : read-only size + writable size</strong></li>
+<li><strong>size : writable size</strong></li>
+</ul>
+<p>docker ps 결과에서 SIZE 항목을 보면 <strong>0B (virtual 64.2MB)</strong> 결과를 볼 수 있는데, 이 때 0B 는 size(writable size)를 의미하고 64.2MB 는 virtual size(read-only + writable size)를 의미한다.<br>
+즉, 처음 container 를 기동한 직후에는 변경 사항이 아직 없으므로 writable size 가 0 이 된다.<br>
+그리고, virtual size 는 read-only size 와 같다.</p>
+<p>이 상태에서 container 내부에서 약 4 MB 짜리 파일을 생성해본다.</p>
+<p><img src="http://cloudrain21.com/wordpress/wp-content/uploads/2019/09/dd.png" alt=""></p>
+<p>이 상태로 외부에서 container 크기를 조회해보면 다음과 같이 size 부분(4.1MB)과 virtual size 부분(68.3MB)이 모두 4.1 MB 만큼 증가하였음을 볼 수 있다.<br>
+이는 곧 writable layer 에 4.1 MB 만큼 변경이 생겼다는 것을 의미한다.</p>
+<p><img src="http://cloudrain21.com/wordpress/wp-content/uploads/2019/09/container-size.png" alt=""></p>
+<p>이렇게 container 에 변경을 가한 후 이를 바탕으로 새로운 image 를 만들어본다. (docker commit, docker tag)<br>
+image 이름은 container_size_test 라고 지정하였다.</p>
+<p><img src="http://cloudrain21.com/wordpress/wp-content/uploads/2019/09/commit.png" alt=""></p>
+<p>docker image history 명령을 통해 새로 만든 image 의 history 정보를 조회해보면, 맨 상단의 layer 가 최종적으로 image 에 적용된 부분이라는 것을 알 수 있다. (4.1 MB)<br>
+이제 위에서 생성한 container_size_test 라는 image 를 이용하여 container 를 구동하면, 이 모든 layer 가 read-only layer 가 되는 것이다.<br>
+물론 최 상단에는 새로운 writable layer 가 만들어지고, 이후에는 이 곳에 변경을 수행할 수 있다.</p>
+<p>지금까지 살펴본 내용을 바탕으로 다수의 container 가 동일한 image 로 구동된 상황에서 해당 container 들이 사용하는 모든 공간을 계산해볼 수 있다.<br>
+즉, 특정 image 를 이용하여 기동된 다수의 container 들이 사용하는 공간의 합은, <strong>공통적으로 사용하는 read-only layer 크기 + 각 container 에서 변경한 사항들(writable layer)의 총합</strong>이 될 것이다.</p>
+<p><strong><em>(virtual size - size) + (size of all containers)</em></strong></p>
+<p>참고로 이렇게 container 들이 사용하는 image 나 변경사항들은 모두 호스트 File system 의 <strong>/var/lib/docker</strong> 디렉토리 내에 저장된다.<br>
+이 영역을 <strong>Docker area 또는 Backing Filesystem</strong> 이라고 부르기도 한다.</p>
+<h3 id="copy-on-write">Copy-on-Write</h3>
+<p>Container 내에서의 변경 관련하여 한 가지 더 알아두어야할 사항이 있다.<br>
+만약 기동된 Container 의 base 가 되는 image layer(read-only layer)에 있는 내용을 변경하고 싶다면 어떻게 해야 할까?<br>
+예를 들어, image 에 이미 존재하는 /etc/xxx.ini 라는 파일의 내용을 변경한다면 어떻게 되는 것일까?<br>
+read-only image layer 의 내용은 프로그램 binary 처럼 변경되지 않는다고 하지 않았던가?</p>
+<p>이러한 경우를 위해 Docker 는 **<a href="https://blog.codeship.com/docker-storage-introduction/">Copy-on-Write 기법</a>**을 사용한다.<br>
+기존의 image 위에 추가되는 내용은 Writable layer 에 그냥 기록하면 된다.<br>
+하지만, image 의 기존 내용이 변경되어야할 경우에는 해당 data 를 Writable layer 로 먼저 Copy 한 후 이를 변경하는 기법을 사용한다.<br>
+이러한 기법을 통해 기존의 image 에 대한 변경을 막을 수 있다.<br>
+변경 후에는 사용자는 하단의 data 는 볼 수 없고, Writable layer(container layer)에 저장된 내용을 보게 된다.<br>
+Copy-on-Write 기법은 그 동작 구조 상 다음의 단점이 있을 수 밖에 없음을 기억하자.</p>
+<ul>
+<li>data 를 먼저 복제(Copy)한 후 변경을 수행해야 하므로 성능 하락(Performance Overhead)을 피할 수 없다.</li>
+<li>하위 layer 에 있는 원본 data 를 유지해야할 뿐 아니라, 상위 layer 에 변경된 data 도 유지해야 하므로 disk space 를 많이 사용할 수 있다.</li>
+</ul>
+<p>위의 2 가지 단점 중 두번째 단점은 사용자가 아키텍처 설계를 효율적으로 한다면 피할 수 있다고 생각한다.<br>
+하위 layer 의 data 까지 수시로 변경이 발생하도록 설계하는 것은 좋은 방법이 아니다.<br>
+이미 언급한대로, 되도록이면 base image 의 변경을 발생시키지 않도록 변경 사항은 별도의 Volume 구성 등의 방법을 통해 회피해야 한다.</p>
+<h3 id="storage-driver">Storage Driver</h3>
+<p>위에서 UFS 에 대한 개념을 설명하였는데, 그러면 이러한 UFS 기능을 제공하기 위해 Docker 는 내부적으로 어떤 기술을 이용할까?<br>
+즉, UFS 구현에 대한 이야기이다.</p>
+<p>UFS 는 Docker Storage Driver 에 의해 구현된다.<br>
+Container 에서 사용자가 UFS 를 통해 Filesystem 을 쉽게 사용할 수 있는 것은 Storage Driver 가 있기 때문이다.<br>
+바로 위에서 언급한 Copy-on-Write 기법을 실현해주는 것도 Storage Driver 이다.<br>
+Storage Driver 는 container 내에서의 파일 I/O 처리를 담당하는 놈이다.</p>
+<p>다양한 Storage Driver 가 존재하며 Pluggable 한 구조로 되어 있기 때문에, Docker 에서 Storage Driver 를 선택하여 사용할 수 있다.<br>
+다만, 모든 Linux system 이 모든 Storage Driver 를 지원하지는 않는다.<br>
+Ubuntu 는 Default Storage Driver 로 aufs 를 사용하며, Centos 는 devicemapper 를 사용한다.<br>
+Redhat 계열은 aufs 를 지원하지 않는다.</p>
+<p>다음은 OS 별로 지원하는 Storage Driver 를 정리한 것이다.<br>
+Storage Driver 별로 특성이 다르고 장단점이 있으므로, <a href="https://docs.docker.com/storage/storagedriver/select-storage-driver/">이곳</a>을 먼저 참조하여 자신의 시스템 workload 에 적합한Storage Driver 를 선택하여 사용하도록 하자.<br>
+(&ldquo;Suitability for your workload&rdquo; Part 참조)<br>
+나의 개인 용 PC 에는 Centos7, Docker 1.11.1 이 설치되어 있어서 Docker 의 Default Storage Driver 로 devicemapper 를 사용하고 있다.<br>
+(이는 docker info 명령의 &lsquo;Storage Driver&rsquo; 항목을 통해 확인할 수 있다.)</p>
+<p><img src="http://cloudrain21.com/wordpress/wp-content/uploads/2019/09/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA-2019-09-04-%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE-10.28.11.png" alt=""></p>
+<p>결국 Container 상에서 변경되는 사항들은 Storage Driver 의 도움에 의해 Backing filesystem(/var/lib/docker)에 저장되는 것이다.<br>
+(위에서 언급한 <strong>Volume 기능은 이러한 Storage Driver 의 도움없이 직접적으로 Host 의 Filesystem 에 접근하기 때문에 성능 상 잇점</strong>이 있다.)</p>
+<p>Storage Driver 가 모든 종류의 Host filesystem 을 Backing filesystem 으로 사용할 수 있는 것은 아니다.<br>
+다음은 Storage Driver 별로 지원하는 Backing filesystem 을 나타낸다.<br>
+기억할 필요까지는 없고 필요할 때 찾아볼 수 있도록 하자.</p>
+<p><img src="http://cloudrain21.com/wordpress/wp-content/uploads/2019/09/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA-2019-09-04-%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE-10.30.27-1024x392.png" alt=""></p>
+<p>Backing filesystem 을 조금 더 이해하자는 의미에서, 나의 Desktop 환경을 기준으로 Backing filesystem 과 container layer 의 연관관계를 잠깐 들여다보자.<br>
+Union filesytem 의 최상단에 위치하는 container layer(writable layer)는 그 자체로는 의미가 없다.<br>
+무언가 변경이 되었을 때 이를 저장할 곳이 필요하다.<br>
+이곳이 Host 의 Backing filesystem 이다.<br>
+따라서, container layer 는 Backing filesystem 의 특정 영역에 mount 가 되어 있어야 한다.<br>
+container 를 하나 기동한 후 mount 상황을 조회해보면 아래와 같이 mount 가 하나 추가되는 것을 볼 수 있다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">/dev/mapper/docker-253:0-205758706-b110da1e299a91352d355601518347132f0a90e71e38848d85871096d7ab7d0d on /var/lib/docker/devicemapper/mnt/b110da1e299a91352d355601518347132f0a90e71e38848d85871096d7ab7d0d <span class="nb">type</span> ext4 <span class="o">(</span>rw,relatime,stripe<span class="o">=</span>16,data<span class="o">=</span>ordered<span class="o">)</span>
+</span></span></code></pre></div><p>즉, /dev/mapper/docker-253:0-205758706-b110da1e&hellip;(container layer 라고 이해하자)가 /var/lib/docker/devicemapper/mnt/b110da1e&hellip; 디렉토리에 mount 되어 있음을 알 수 있다.<br>
+mount 된 Host 의 Filesystem type 은 ext4 이다.<br>
+이는 devicemapper 라는 Storage Driver 가 자동으로 수행해주는 작업이다.</p>
+<p>이쯤에서 <del>쥐꼬리만한</del> 상상력을 발휘하여 예측을 하나 해보자.<br>
+container 내에서 어떠한 변경을 발생시키면(예를 들어, 신규 파일 생성), /var/lib/docker/devicemapper/mnt/b110da1e&hellip; 디렉토리 내에서도 그 변경이 보이지 않을까?<br>
+mount 가 되어 있으니까&hellip;</p>
+<p>해보자.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># container 안에서 aa.txt 파일 생성</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">root@8b037d600474:/#  touch aa.txt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># /var/lib/docker/devicemapper/mnt/b110da1e.../rootfs 안에 aa.txt 파일이 생성되어 있음을 확인</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost b110da1e299a91352d355601518347132f0a90e71e38848d85871096d7ab7d0d<span class="o">]</span><span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl">id  lost+found  rootfs
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost b110da1e299a91352d355601518347132f0a90e71e38848d85871096d7ab7d0d<span class="o">]</span><span class="c1"># cd rootfs/</span>
+</span></span><span class="line"><span class="cl"><span class="o">[</span>root@localhost rootfs<span class="o">]</span><span class="c1"># ls -al</span>
+</span></span><span class="line"><span class="cl">합계 <span class="m">84</span>
+</span></span><span class="line"><span class="cl">drwxr-xr-x. <span class="m">21</span> root root <span class="m">4096</span>  9월  <span class="m">4</span> 18:47 .
+</span></span><span class="line"><span class="cl">drwxr-xr-x   <span class="m">4</span> root root <span class="m">4096</span>  9월  <span class="m">4</span> 19:02 ..
+</span></span><span class="line"><span class="cl">-rwxr-xr-x   <span class="m">1</span> root root    <span class="m">0</span>  9월  <span class="m">4</span> 18:42 .dockerenv
+</span></span><span class="line"><span class="cl">-rw-r--r--   <span class="m">1</span> root root    <span class="m">0</span>  9월  <span class="m">4</span> 18:47 aa.txt   &lt;--- 생겼다~
+</span></span><span class="line"><span class="cl">drwxr-xr-x.  <span class="m">2</span> root root <span class="m">4096</span> 12월  <span class="m">8</span>  <span class="m">2015</span> bin
+</span></span><span class="line"><span class="cl">drwxr-xr-x.  <span class="m">2</span> root root <span class="m">4096</span>  4월 <span class="m">11</span>  <span class="m">2014</span> boot
+</span></span><span class="line"><span class="cl">drwxr-xr-x.  <span class="m">4</span> root root <span class="m">4096</span>  9월  <span class="m">4</span> 18:42 dev
+</span></span><span class="line"><span class="cl">drwxr-xr-x. <span class="m">61</span> root root <span class="m">4096</span>  9월  <span class="m">4</span> 18:42 etc
+</span></span><span class="line"><span class="cl">drwxr-xr-x.  <span class="m">2</span> root root <span class="m">4096</span>  4월 <span class="m">11</span>  <span class="m">2014</span> home
+</span></span><span class="line"><span class="cl">drwxr-xr-x. <span class="m">12</span> root root <span class="m">4096</span> 12월  <span class="m">8</span>  <span class="m">2015</span> lib
+</span></span><span class="line"><span class="cl">drwxr-xr-x.  <span class="m">2</span> root root <span class="m">4096</span> 12월  <span class="m">8</span>  <span class="m">2015</span> lib64
+</span></span><span class="line"><span class="cl">drwxr-xr-x.  <span class="m">2</span> root root <span class="m">4096</span> 12월  <span class="m">8</span>  <span class="m">2015</span> media
+</span></span><span class="line"><span class="cl">drwxr-xr-x.  <span class="m">2</span> root root <span class="m">4096</span>  4월 <span class="m">11</span>  <span class="m">2014</span> mnt
+</span></span><span class="line"><span class="cl">drwxr-xr-x.  <span class="m">2</span> root root <span class="m">4096</span> 12월  <span class="m">8</span>  <span class="m">2015</span> opt
+</span></span><span class="line"><span class="cl">drwxr-xr-x.  <span class="m">2</span> root root <span class="m">4096</span>  4월 <span class="m">11</span>  <span class="m">2014</span> proc
+</span></span><span class="line"><span class="cl">drwx------.  <span class="m">2</span> root root <span class="m">4096</span> 12월  <span class="m">8</span>  <span class="m">2015</span> root
+</span></span><span class="line"><span class="cl">drwxr-xr-x.  <span class="m">8</span> root root <span class="m">4096</span>  9월  <span class="m">4</span> 18:42 run
+</span></span><span class="line"><span class="cl">drwxr-xr-x.  <span class="m">2</span> root root <span class="m">4096</span> 12월  <span class="m">9</span>  <span class="m">2015</span> sbin
+</span></span><span class="line"><span class="cl">drwxr-xr-x.  <span class="m">2</span> root root <span class="m">4096</span> 12월  <span class="m">8</span>  <span class="m">2015</span> srv
+</span></span><span class="line"><span class="cl">drwxr-xr-x.  <span class="m">2</span> root root <span class="m">4096</span>  3월 <span class="m">13</span>  <span class="m">2014</span> sys
+</span></span><span class="line"><span class="cl">drwxrwxrwt.  <span class="m">2</span> root root <span class="m">4096</span> 12월  <span class="m">8</span>  <span class="m">2015</span> tmp
+</span></span><span class="line"><span class="cl">drwxr-xr-x. <span class="m">10</span> root root <span class="m">4096</span> 12월  <span class="m">9</span>  <span class="m">2015</span> usr
+</span></span><span class="line"><span class="cl">drwxr-xr-x. <span class="m">11</span> root root <span class="m">4096</span> 12월  <span class="m">9</span>  <span class="m">2015</span> var
+</span></span></code></pre></div><p>예측이 맞았다.<br>
+/var/lib/docker/devicemapper/mnt/b110da1e&hellip; 디렉토리 내에는 <strong>rootfs</strong> 라는 디렉토리가 존재하는데, 이 디렉토리가 container 안에서는 root(/)로 보이게 된다.<br>
+이 때문에 container 내에서 root(/) 디렉토리 아래에 파일을 생성하면, Host 에서는 위의 디렉토리에 파일이 생성되는 것이다.<br>
+이는 <strong>Mount namespace</strong> 라는 기술을 이용하여 Host 의 특정 디렉토리를 container 내에서는 root(/) 디렉토리로 보이도록 해주기 때문이다.</p>
+<hr>
+<h2 id="_reference_"><em>reference</em></h2>
+<p><a href="http://cloudrain21.com/examination-of-docker-containersize-ufs">http://cloudrain21.com/examination-of-docker-containersize-ufs</a></p>
+</article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://jiwonkkang.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://jiwonkkang.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://jiwonkkang.github.io/css/gitalk.css'>
+<script src='https://jiwonkkang.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '5a1c911a3bb5ff14fe5e',
+    clientSecret: '8586a43d9a15967e4760ef333ef31eab72c6d3ea',
+    repo: 'jiwonkkang.github.io',
+    owner: 'JiwonKKang',
+    admin: ['JiwonKKang'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://jiwonkkang.github.io/">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://jiwonkkang.github.io/js/github-style.js"></script>
+
+
+
+
+</html>

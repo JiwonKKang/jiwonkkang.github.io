@@ -6,7 +6,16 @@
     <description>Recent content on Jiwon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Mon, 14 Aug 2023 11:27:47 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 16 Aug 2023 11:51:28 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Docker] 유니온 파일 시스템</title>
+      <link>https://jiwonkkang.github.io/post/docker-ufs/</link>
+      <pubDate>Wed, 16 Aug 2023 11:51:28 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/docker-ufs/</guid>
+      <description>docker는 이미지를 어떻게 관리할까?</description>
+    </item>
+    
     <item>
       <title>Docker란 무엇일까?</title>
       <link>https://jiwonkkang.github.io/post/what-docker/</link>
