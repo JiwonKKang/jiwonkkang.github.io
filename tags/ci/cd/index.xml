@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ci/cd on Jiwon&#39;s blog</title>
+    <link>https://jiwonkkang.github.io/tags/ci/cd/</link>
+    <description>Recent content in ci/cd on Jiwon&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko</language><atom:link href="https://jiwonkkang.github.io/tags/ci/cd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Git] Github Action 알아보기</title>
+      <link>https://jiwonkkang.github.io/post/github-action-immersion/</link>
+      <pubDate>Mon, 21 Aug 2023 09:44:52 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/github-action-immersion/</guid>
+      <description>Github Action을 통해 CI/CD를 해보자</description>
+    </item>
+    
+  </channel>
+</rss>
