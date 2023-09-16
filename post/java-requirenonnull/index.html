@@ -159,9 +159,9 @@
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sun, 17 Sep 2023 02:49:40 &#43;0900"
+                  Modified <relative-time datetime="Sun, 17 Sep 2023 02:52:13 &#43;0900"
                     class="no-wrap">
-                    Sun, 17 Sep 2023 02:49:40 &#43;0900</relative-time>
+                    Sun, 17 Sep 2023 02:52:13 &#43;0900</relative-time>
                   
                 </div>
               </div>
@@ -258,8 +258,7 @@
 위의 B클래스는 다음과 같이 객체 생성 시점에 바로 익셉션이 발생할 것입니다.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">A</span> <span class="n">a</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">B</span> <span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">B</span><span class="o">(</span><span class="n">a</span><span class="o">);</span>     <span class="c1">// 생성 시점에 바로 NPE 발생
-</span></span></span></code></pre></div><hr>
-<p>반면 다음과 같이 requireNonNull을 사용하지 않은 경우는 어떨까?</p>
+</span></span></span></code></pre></div><p>반면 다음과 같이 requireNonNull을 사용하지 않은 경우는 어떨까?</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">C</span><span class="o">{</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="n">A</span> <span class="n">a</span><span class="o">;</span>
@@ -316,7 +315,6 @@
 <li>requireNonNull은 주어진 객체가 NULL인지 확인하는 방어 프로그래밍</li>
 </ul>
 <p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
-<hr>
 <blockquote>
 <p><em>출처</em></p>
 </blockquote>
