@@ -6,7 +6,16 @@
     <description>Recent content in Java on Jiwon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Sun, 27 Aug 2023 22:54:45 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Sep 2023 02:22:08 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Java] Objects.requireNonNull()</title>
+      <link>https://jiwonkkang.github.io/post/java-requirenonnull/</link>
+      <pubDate>Sun, 17 Sep 2023 02:22:08 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/java-requirenonnull/</guid>
+      <description>Objects.requireNonNull()은 왜 사용해야 할까?</description>
+    </item>
+    
     <item>
       <title>[Java] Map의 computeIfAbsent</title>
       <link>https://jiwonkkang.github.io/post/java-computeifabsent/</link>

@@ -6,7 +6,16 @@
     <description>Recent content in Tags on Jiwon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Mon, 11 Sep 2023 09:48:08 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 17 Sep 2023 02:22:08 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java</title>
+      <link>https://jiwonkkang.github.io/tags/java/</link>
+      <pubDate>Sun, 17 Sep 2023 02:22:08 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/tags/java/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>redis</title>
       <link>https://jiwonkkang.github.io/tags/redis/</link>
@@ -22,15 +31,6 @@
       <pubDate>Wed, 30 Aug 2023 00:05:13 +0900</pubDate>
       
       <guid>https://jiwonkkang.github.io/tags/kafka/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>https://jiwonkkang.github.io/tags/java/</link>
-      <pubDate>Sun, 27 Aug 2023 22:54:45 +0900</pubDate>
-      
-      <guid>https://jiwonkkang.github.io/tags/java/</guid>
       <description></description>
     </item>
     
