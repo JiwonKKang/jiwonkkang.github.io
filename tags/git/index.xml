@@ -6,7 +6,16 @@
     <description>Recent content in Git on Jiwon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Mon, 21 Aug 2023 09:44:52 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 Oct 2023 17:26:57 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Git] PR(Pull Request) 날리는 법</title>
+      <link>https://jiwonkkang.github.io/post/git-pr/</link>
+      <pubDate>Wed, 11 Oct 2023 17:26:57 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/git-pr/</guid>
+      <description>협업할때 Github Pull Request 날리는법</description>
+    </item>
+    
     <item>
       <title>[Git] Github Action 알아보기</title>
       <link>https://jiwonkkang.github.io/post/github-action-immersion/</link>
