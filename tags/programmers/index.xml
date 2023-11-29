@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>programmers on Jiwon&#39;s blog</title>
+    <link>https://jiwonkkang.github.io/tags/programmers/</link>
+    <description>Recent content in programmers on Jiwon&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko</language>
+    <lastBuildDate>Wed, 29 Nov 2023 21:19:24 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/programmers/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[프로그래머스] 공원산책 - 자바</title>
+      <link>https://jiwonkkang.github.io/post/programmers-gongwon/</link>
+      <pubDate>Wed, 29 Nov 2023 21:19:24 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/programmers-gongwon/</guid>
+      <description>프로그래머스 Level 1 공원 산책 문제</description>
+    </item>
+    
+  </channel>
+</rss>
