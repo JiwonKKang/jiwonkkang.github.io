@@ -6,7 +6,16 @@
     <description>Recent content on Jiwon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Wed, 29 Nov 2023 21:19:24 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Nov 2023 19:26:15 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[프로그래머스] 디스크 컨트롤러 - 자바</title>
+      <link>https://jiwonkkang.github.io/post/programmers-disk/</link>
+      <pubDate>Thu, 30 Nov 2023 19:26:15 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/programmers-disk/</guid>
+      <description>프로그래머스 Level 3 디스크 컨트롤러 자바 풀이</description>
+    </item>
+    
     <item>
       <title>[프로그래머스] 공원산책 - 자바</title>
       <link>https://jiwonkkang.github.io/post/programmers-gongwon/</link>
