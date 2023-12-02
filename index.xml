@@ -225,6 +225,16 @@
     
     <item>
       <title></title>
+      <link>https://jiwonkkang.github.io/post/programmers-hindex/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/programmers-hindex/</guid>
+      <description>이 title: &amp;ldquo;[프로그래머스] H-Index - 자바&amp;rdquo; date: 2023-12-03T01:26:14+09:00 draft: true pin: false summary: &amp;ldquo;[프로그래머스] H-Index Level 2 - 자바 풀이&amp;rdquo; tags:
+programmers [프로그래머스] H-Index - 자바 나의 풀이 import java.util.*; class Solution { public int solution(int[] citations) { List&amp;lt;Integer&amp;gt; answerList = new ArrayList&amp;lt;&amp;gt;(); Arrays.sort(citations); for (int i = 0; i &amp;lt; citations.length; i++) { if (citations[i] &amp;gt;= citations.length - i) { answerList.add(citations.length - i); } } return answerList.isEmpty() ? 0 : answerList.</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://jiwonkkang.github.io/readme/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
