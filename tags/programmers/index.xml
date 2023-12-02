@@ -6,7 +6,16 @@
     <description>Recent content in programmers on Jiwon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Sat, 02 Dec 2023 01:33:13 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/programmers/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Dec 2023 21:45:05 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/programmers/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[프로그래머스] 성격 유형 검사 - 자바</title>
+      <link>https://jiwonkkang.github.io/post/programmers-mbti/</link>
+      <pubDate>Sat, 02 Dec 2023 21:45:05 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/programmers-mbti/</guid>
+      <description>[프로그래머스] 성격 유형 검사 - 2022 KAKAO TECH INTERNSHIP</description>
+    </item>
+    
     <item>
       <title>[프로그래머스] 개인정보 수집 유효기간 - 자바</title>
       <link>https://jiwonkkang.github.io/post/programmers-terms/</link>
