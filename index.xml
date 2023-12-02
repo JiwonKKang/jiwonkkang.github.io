@@ -6,7 +6,16 @@
     <description>Recent content on Jiwon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Sat, 02 Dec 2023 21:45:05 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Dec 2023 01:37:28 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[프로그래머스] H-Index - 자바</title>
+      <link>https://jiwonkkang.github.io/post/programmers-hindex/</link>
+      <pubDate>Sun, 03 Dec 2023 01:37:28 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/programmers-hindex/</guid>
+      <description>[프로그래머스] H-Index Level 2 - 자바풀이</description>
+    </item>
+    
     <item>
       <title>[프로그래머스] 성격 유형 검사 - 자바</title>
       <link>https://jiwonkkang.github.io/post/programmers-mbti/</link>
@@ -221,16 +230,6 @@
       
       <guid>https://jiwonkkang.github.io/post/git-merge/</guid>
       <description>Git 다양한 Merge 방법</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://jiwonkkang.github.io/post/programmers-hindex/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://jiwonkkang.github.io/post/programmers-hindex/</guid>
-      <description>이 title: &amp;ldquo;[프로그래머스] H-Index - 자바&amp;rdquo; date: 2023-12-03T01:26:14+09:00 draft: true pin: false summary: &amp;ldquo;[프로그래머스] H-Index Level 2 - 자바 풀이&amp;rdquo; tags:
-programmers [프로그래머스] H-Index - 자바 나의 풀이 import java.util.*; class Solution { public int solution(int[] citations) { List&amp;lt;Integer&amp;gt; answerList = new ArrayList&amp;lt;&amp;gt;(); Arrays.sort(citations); for (int i = 0; i &amp;lt; citations.length; i++) { if (citations[i] &amp;gt;= citations.length - i) { answerList.add(citations.length - i); } } return answerList.isEmpty() ? 0 : answerList.</description>
     </item>
     
     <item>
