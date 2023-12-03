@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>backtracking on Jiwon&#39;s blog</title>
+    <link>https://jiwonkkang.github.io/tags/backtracking/</link>
+    <description>Recent content in backtracking on Jiwon&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko</language>
+    <lastBuildDate>Sun, 03 Dec 2023 14:17:59 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/backtracking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[프로그래머스] 소수찾기 - 자바</title>
+      <link>https://jiwonkkang.github.io/post/programmers-findprime/</link>
+      <pubDate>Sun, 03 Dec 2023 14:17:59 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/programmers-findprime/</guid>
+      <description>[프로그래머스] 소수찾기 Level 2 - 자바풀이</description>
+    </item>
+    
+  </channel>
+</rss>
