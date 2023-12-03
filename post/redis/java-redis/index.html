@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://jiwonkkang.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/syntax.css' />
+    <title>SpringBoot에서 Redis를 적용해보자 - Jiwon&#39;s blog</title>
+    
+    <link rel="icon" type="image/x-icon" href='https://jiwonkkang.github.io/images/favicon.ico'>
+    
+    <meta name="theme-color" content="#1e2327">
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RHFSNZ7DGH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RHFSNZ7DGH');
+</script>
+    
+    <meta name="description"
+  content="카카오API를 활용한 약국길찾기 서비스에 Redis를 적용해보자" />
+<meta name="keywords"
+  content='' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jiwonkkang.github.io/post/redis/java-redis/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="SpringBoot에서 Redis를 적용해보자 - Jiwon&#39;s blog" />
+<meta name="twitter:description"
+  content="카카오API를 활용한 약국길찾기 서비스에 Redis를 적용해보자" />
+<meta name="twitter:site" content="https://jiwonkkang.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://jiwonkkang.github.io/">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="SpringBoot에서 Redis를 적용해보자 - Jiwon&#39;s blog">
+<meta property="og:description"
+  content="카카오API를 활용한 약국길찾기 서비스에 Redis를 적용해보자" />
+<meta property="og:url" content="https://jiwonkkang.github.io/post/redis/java-redis/" />
+<meta property="og:site_name" content="SpringBoot에서 Redis를 적용해보자" />
+<meta property="og:image"
+  content="https://jiwonkkang.github.io/">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2023-08-12 23:26:47 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://jiwonkkang.github.io/">
+        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://jiwonkkang.github.io/">
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://jiwonkkang.github.io/">
+        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+          width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://jiwonkkang.github.io/">
+                  <img class=" avatar-user"
+                    src="https://jiwonkkang.github.io/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://jiwonkkang.github.io/">JiwonKKang</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://jiwonkkang.github.io/post/redis/java-redis/">SpringBoot에서 Redis를 적용해보자</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Sat, 12 Aug 2023 23:26:47 &#43;0900"
+                    class="no-wrap">
+                    Sat, 12 Aug 2023 23:26:47 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Sun, 13 Aug 2023 22:14:10 &#43;0900"
+                    class="no-wrap">
+                    Sun, 13 Aug 2023 22:14:10 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1762 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/spring">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      spring
+                    </a>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><blockquote>
+<h1 id="redis란">Redis란?</h1>
+</blockquote>
+<p><strong>메모리상에 key value store (KVS) 를 구축할수 있게 해주는 소프트웨어이다.</strong></p>
+<p>KVS는 저장하고 싶은 데이터(값 : value) 에 대해, 대응하는 키를 설정해, 이것을 pair 로 보존하는 데이터베이스의 한 종류며, Redis 는 컴퓨터의 메인 메모리상에 KVS를 구축하여, 외부 프로그램으로부터 데이터의 보존및 읽기가 가능케 한다.
+ANSI C로 만들어져있으며, 모든 데이터셋을 메모리내에 읽어들이기에, 엄청난 수준의 속도로 동작한다.</p>
+<p>엔트리급 리눅스 서버로 <strong>110,000 SET / 초, 81,000 GET / 초</strong> 의 속도를 내게 할수있다.</p>
+<p>또한 Redis는 커멘드의 파이프라이닝 을 지원하기에 복수의 값을 하나의 커멘드로 취득하게 설정이 가능하기에,
+클라이언트 라이브러리와의 통신속도 향상도 가능하다</p>
+<blockquote>
+<h1 id="데이터-구조">데이터 구조</h1>
+</blockquote>
+<ul>
+<li>문자열</li>
+<li>바이너리 데이터</li>
+<li>리스트</li>
+<li>집합(set)</li>
+<li>해쉬</li>
+</ul>
+<p>이런 데이터에 대해 요소의 pop/ push, add/remove, 또는 서버사이드에 set 사이에서 합, 곱, 차이등 형에 의해 여러가지 조작을 지원하고 있다. Redis는 set형과 list형 에 대해 다른종류의 정렬기능을 지원하고 있다.</p>
+<blockquote>
+<h1 id="데이터-영속화">데이터 영속화</h1>
+</blockquote>
+<p>Redis는 인메모리 데이터베이스라고 들었기때문에 처음에는 어플리케이션이 꺼지거나 redis서버가 꺼지면
+데이터가 다 날라가는거 아닌가? 라는 생각을 했었다.</p>
+<p>하지만 Redis에서는 DB로서도 활용할수있게 데이터 영속화를 실행한다.</p>
+<p>Redis가 데이터 영속화를 하는 방법 스냅샷을 찍어 정기적으로 데이터베이스의 내용을 디스크에 쓴다.</p>
+<p>따라서 Redis를 재기동하게되면 이 파일로부터 데이터를 불러와 복원시킨다. 일정횟수, 일정 간격으로 디스크에 파일을 쓴다.</p>
+<p>파일의 쓰기 타이밍은 설정파일, config 커맨드로 설정 가능하다.</p>
+<blockquote>
+<h1 id="redis-구조">Redis 구조</h1>
+</blockquote>
+<h2 id="stand-alone">Stand Alone</h2>
+<p><img src="https://blog.octo.com/wp-content/uploads/2017/08/screen-shot-2017-08-11-at-14-34-30.png" alt=""></p>
+<p>기본적인 Redis 1개로만 구성된 구조입니다.</p>
+<h2 id="master---slavereplica">Master - Slave(Replica)</h2>
+<p><img src="https://cdn.educba.com/academy/wp-content/uploads/2022/11/Redis-Master-Slave..jpg" alt=""></p>
+<p>Redis Master 1개의 여러개의 Redis Slave로 구성할수 있습니다.
+Redis Slave는 Redis Mater와 계속하여 데이터를 싱크합니다.</p>
+<p>기본적으로 Redis Slave는 read만 지원하게됩니다.</p>
+<p>Redis Master 장애시 Fail Over 대처가 어렵습니다.(할순 있습니다.)</p>
+<h2 id="sentinel">Sentinel</h2>
+<p><img src="https://t1.daumcdn.net/cfile/tistory/995CB7335A02B5D102" alt=""></p>
+<p>Redis Sentinel은 Redis 서버에 대한 상태를 감시합니다.
+Redis Master에 장애가 발생할 경우 Redis Slave를 Redis Master로 자동으로 변경하여 Fail Over에 대처합니다.</p>
+<h2 id="cluster">Cluster</h2>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F47nR9%2Fbtq4bCW6z5w%2FrgvB2GyckL8LCjXWtDHpV0%2Fimg.png" alt=""></p>
+<p>Sentinel 구조 처럼 서로 통신하며 장애시에 Mater와 Slave를 전환 할 수 있습니다.</p>
+<p>또한 데이터 샤딩을 통해 임의로 데이터셋을 나누어서 저장하기때문에 성능면으로도 좋습니다.</p>
+<!-- raw HTML omitted -->
+<pre tabindex="0"><code>Availability : Cluster &gt;= Sentinel &gt; Master-Replica &gt; SA
+
+Performance : Cluster &gt; Sentinel &gt; Master-Replica &gt; SA
+
+Efficiency : SA &gt; Master-Replica &gt;= Sentinel &gt; Cluster
+</code></pre><!-- raw HTML omitted -->
+<blockquote>
+<h1 id="memcached와의-차이점">MemCached와의 차이점</h1>
+</blockquote>
+<!-- raw HTML omitted -->
+<ol>
+<li>DataType
+<ul>
+<li>Redis : Hash, List, Set, Sorted Set, Geo, String</li>
+<li>Memcached : String</li>
+</ul>
+</li>
+<li>Thread
+<ul>
+<li>Redis : Single Thread</li>
+<li>Memcached : Multi Thread</li>
+</ul>
+</li>
+<li>Scale
+<ul>
+<li>Redis : ScaleOut</li>
+<li>Memcached : Scale Up</li>
+</ul>
+</li>
+<li>Memory Policy
+<ul>
+<li>Redis : no eviction, volatile-lue, volatile-ttl, allkey-random</li>
+<li>Memcached : LRU</li>
+</ul>
+</li>
+<li>Persistence
+<ul>
+<li>Redis : AOF, RDB</li>
+<li>Memcached : None</li>
+</ul>
+</li>
+<li>ETC
+<ul>
+<li>Redis : LUA Script</li>
+</ul>
+</li>
+</ol>
+<!-- raw HTML omitted -->
+<blockquote>
+<h1 id="springboot에서-redis-적용">SpringBoot에서 Redis 적용</h1>
+</blockquote>
+<p>Spring Boot 에서 Redis 를 사용하는 방법은 <code>RedisRepository</code> 와 <code>RedisTemplate</code> 두 가지가 있습니다.</p>
+<p>그 전에 먼저 공통 세팅이 필요합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-gradle" data-lang="gradle"><span class="line"><span class="cl"><span class="n">implementation</span> <span class="s1">&#39;org.springframework.boot:spring-boot-starter-data-redis&#39;</span>
+</span></span></code></pre></div><p>우선 build.gradle에 의존성을 추가해줍니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="nt">redis</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l">localhost </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">6379</span><span class="w">
+</span></span></span></code></pre></div><ul>
+<li><code>application.yaml</code> 에 host 와 port 를 설정합니다.</li>
+<li><code>localhost:6379</code> 는 기본값이기 때문에 만약 Redis 를 <code>localhost:6379</code> 로 띄웠다면 따로 설정하지 않아도 연결이 됩니다.</li>
+<li>하지만 일반적으로 운영 서버에서는 별도의 Host 를 사용하기 때문에 값을 이렇게 별도의 값을 세팅하고 Configuration 에서 Bean 에 등록해줍니다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Configuration</span>  
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RedisConfig</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="nd">@Value</span><span class="o">(</span><span class="s">&#34;${spring.redis.host}&#34;</span><span class="o">)</span>  
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">String</span> <span class="n">redisHost</span><span class="o">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="nd">@Value</span><span class="o">(</span><span class="s">&#34;${spring.redis.port}&#34;</span><span class="o">)</span>  
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kt">int</span> <span class="n">redisPort</span><span class="o">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="nd">@Bean</span>  
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">RedisConnectionFactory</span> <span class="nf">redisConnectionFactory</span><span class="o">()</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="n">LettuceConnectionFactory</span><span class="o">(</span><span class="n">redisHost</span><span class="o">,</span> <span class="n">redisPort</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>    
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nd">@Bean</span>  
+</span></span><span class="line"><span class="cl">	<span class="kd">public</span> <span class="n">RedisTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="nf">redisTemplate</span><span class="o">()</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	    <span class="n">RedisTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">redisTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RedisTemplate</span><span class="o">&lt;&gt;();</span>  
+</span></span><span class="line"><span class="cl">	    <span class="n">redisTemplate</span><span class="o">.</span><span class="na">setConnectionFactory</span><span class="o">(</span><span class="n">redisConnectionFactory</span><span class="o">());</span>  
+</span></span><span class="line"><span class="cl">	    <span class="n">redisTemplate</span><span class="o">.</span><span class="na">setKeySerializer</span><span class="o">(</span><span class="k">new</span> <span class="n">StringRedisSerializer</span><span class="o">());</span>  
+</span></span><span class="line"><span class="cl">	    <span class="n">redisTemplate</span><span class="o">.</span><span class="na">setHashKeySerializer</span><span class="o">(</span><span class="k">new</span> <span class="n">StringRedisSerializer</span><span class="o">());</span>  
+</span></span><span class="line"><span class="cl">	    <span class="n">redisTemplate</span><span class="o">.</span><span class="na">setHashValueSerializer</span><span class="o">(</span><span class="k">new</span> <span class="n">StringRedisSerializer</span><span class="o">());</span>  
+</span></span><span class="line"><span class="cl">	    <span class="k">return</span> <span class="n">redisTemplate</span><span class="o">;</span>  
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><p>Spring Data Redis 의 Redis Repository 를 이용하면 간단하게 Domain Entity 를 Redis Hash 로 만들 수 있습니다.</p>
+<p>다만 트랜잭션을 지원하지 않기 때문에 만약 트랜잭션을 적용하고 싶다면 <code>RedisTemplate</code> 을 사용해야 합니다.</p>
+<p>제 프로젝트에서는 <code>RedisTemplate</code>을 사용합니다.</p>
+<p><code>RedisTemplate</code> 을 사용하면 특정 Entity 뿐만 아니라 여러가지 원하는 타입을 넣을 수 있습니다.</p>
+<p><code>template</code> 을 선언한 후 원하는 타입에 맞는 <code>Operations</code> 을 꺼내서 사용합니다.</p>
+<blockquote>
+<h1 id="redistemplate-예제">RedisTemplate 예제</h1>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@SpringBootTest</span>  
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">RedisTemplateTest</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="nd">@Autowired</span>  
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">RedisTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">redisTemplate</span><span class="o">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="nd">@Test</span>  
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">testStrings</span><span class="o">()</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="c1">// given  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ValueOperations</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">valueOperations</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForValue</span><span class="o">();</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">key</span> <span class="o">=</span> <span class="s">&#34;stringKey&#34;</span><span class="o">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="c1">// when  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">valueOperations</span><span class="o">.</span><span class="na">set</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="s">&#34;hello&#34;</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="c1">// then  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">String</span> <span class="n">value</span> <span class="o">=</span> <span class="n">valueOperations</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">assertThat</span><span class="o">(</span><span class="n">value</span><span class="o">).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">&#34;hello&#34;</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="nd">@Test</span>  
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">testSet</span><span class="o">()</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="c1">// given  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">SetOperations</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">setOperations</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForSet</span><span class="o">();</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">key</span> <span class="o">=</span> <span class="s">&#34;setKey&#34;</span><span class="o">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="c1">// when  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">setOperations</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="s">&#34;h&#34;</span><span class="o">,</span> <span class="s">&#34;e&#34;</span><span class="o">,</span> <span class="s">&#34;l&#34;</span><span class="o">,</span> <span class="s">&#34;l&#34;</span><span class="o">,</span> <span class="s">&#34;o&#34;</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="c1">// then  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">members</span> <span class="o">=</span> <span class="n">setOperations</span><span class="o">.</span><span class="na">members</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">Long</span> <span class="n">size</span> <span class="o">=</span> <span class="n">setOperations</span><span class="o">.</span><span class="na">size</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="n">assertThat</span><span class="o">(</span><span class="n">members</span><span class="o">).</span><span class="na">containsOnly</span><span class="o">(</span><span class="s">&#34;h&#34;</span><span class="o">,</span> <span class="s">&#34;e&#34;</span><span class="o">,</span> <span class="s">&#34;l&#34;</span><span class="o">,</span> <span class="s">&#34;o&#34;</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">assertThat</span><span class="o">(</span><span class="n">size</span><span class="o">).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="n">4</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="nd">@Test</span>  
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">testHash</span><span class="o">()</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="c1">// given  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">HashOperations</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">hashOperations</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForHash</span><span class="o">();</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">key</span> <span class="o">=</span> <span class="s">&#34;hashKey&#34;</span><span class="o">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="c1">// when  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">hashOperations</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="s">&#34;hello&#34;</span><span class="o">,</span> <span class="s">&#34;world&#34;</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="c1">// then  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">Object</span> <span class="n">value</span> <span class="o">=</span> <span class="n">hashOperations</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="s">&#34;hello&#34;</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">assertThat</span><span class="o">(</span><span class="n">value</span><span class="o">).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="s">&#34;world&#34;</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="n">Map</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">entries</span> <span class="o">=</span> <span class="n">hashOperations</span><span class="o">.</span><span class="na">entries</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">assertThat</span><span class="o">(</span><span class="n">entries</span><span class="o">.</span><span class="na">keySet</span><span class="o">()).</span><span class="na">containsExactly</span><span class="o">(</span><span class="s">&#34;hello&#34;</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">assertThat</span><span class="o">(</span><span class="n">entries</span><span class="o">.</span><span class="na">values</span><span class="o">()).</span><span class="na">containsExactly</span><span class="o">(</span><span class="s">&#34;world&#34;</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="n">Long</span> <span class="n">size</span> <span class="o">=</span> <span class="n">hashOperations</span><span class="o">.</span><span class="na">size</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">assertThat</span><span class="o">(</span><span class="n">size</span><span class="o">).</span><span class="na">isEqualTo</span><span class="o">(</span><span class="n">entries</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>  
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>  
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><ul>
+<li>위에서부터 차례대로 Strings, Set, Hash 자료구조에 대한 Operations 입니다.</li>
+<li><code>redisTemplate</code> 을 주입받은 후에 원하는 Key, Value 타입에 맞게 Operations 을 선언해서 사용할 수 있습니다.</li>
+<li>가장 흔하게 사용되는 <code>RedisTemplate&lt;String, String&gt;</code> 을 지원하는 <code>StringRedisTemplate</code> 타입도 따로 있습니다.</li>
+</ul>
+<blockquote>
+<h1 id="적용">적용</h1>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PharmacyRedisTemplateService</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">CACHE_KEY</span> <span class="o">=</span> <span class="s">&#34;PHARMACY&#34;</span><span class="o">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">final</span> <span class="n">RedisTemplate</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">redisTemplate</span><span class="o">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">final</span> <span class="n">ObjectMapper</span> <span class="n">objectMapper</span><span class="o">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">HashOperations</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">hashOperations</span><span class="o">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="nd">@PostConstruct</span>  
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="o">()</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="o">.</span><span class="na">hashOperations</span> <span class="o">=</span> <span class="n">redisTemplate</span><span class="o">.</span><span class="na">opsForHash</span><span class="o">();</span>  
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">save</span><span class="o">(</span><span class="n">PharmacyDto</span> <span class="n">pharmacyDto</span><span class="o">)</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span><span class="n">Objects</span><span class="o">.</span><span class="na">isNull</span><span class="o">(</span><span class="n">pharmacyDto</span><span class="o">)</span> <span class="o">||</span> <span class="n">Objects</span><span class="o">.</span><span class="na">isNull</span><span class="o">(</span><span class="n">pharmacyDto</span><span class="o">.</span><span class="na">getId</span><span class="o">()))</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="o">;</span>  
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">hashOperations</span><span class="o">.</span><span class="na">put</span><span class="o">(</span>  
+</span></span><span class="line"><span class="cl">                    <span class="n">CACHE_KEY</span><span class="o">,</span>  
+</span></span><span class="line"><span class="cl">                    <span class="n">pharmacyDto</span><span class="o">.</span><span class="na">getId</span><span class="o">().</span><span class="na">toString</span><span class="o">(),</span>  
+</span></span><span class="line"><span class="cl">                    <span class="n">serializePharmacyDto</span><span class="o">(</span><span class="n">pharmacyDto</span><span class="o">));</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;[PharmacyRedisTemplateService save success] id : {}&#34;</span><span class="o">,</span> <span class="n">pharmacyDto</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>  
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">JsonProcessingException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">&#34;[PharmacyRedisTemplateService save error] : {}&#34;</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>  
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>  
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">PharmacyDto</span><span class="o">&gt;</span> <span class="nf">findAll</span><span class="o">()</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">try</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">PharmacyDto</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;();</span>  
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="o">(</span><span class="n">String</span> <span class="n">s</span> <span class="o">:</span> <span class="n">hashOperations</span><span class="o">.</span><span class="na">entries</span><span class="o">(</span><span class="n">CACHE_KEY</span><span class="o">).</span><span class="na">values</span><span class="o">())</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">                <span class="n">PharmacyDto</span> <span class="n">pharmacyDto</span> <span class="o">=</span> <span class="n">deserializePharmacyDto</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">                <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">pharmacyDto</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">            <span class="o">}</span>  
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">list</span><span class="o">;</span>  
+</span></span><span class="line"><span class="cl">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">&#34;[PharmacyRedisTemplateService findAll error] : {}&#34;</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>  
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">Collections</span><span class="o">.</span><span class="na">emptyList</span><span class="o">();</span>  
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>  
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">delete</span><span class="o">(</span><span class="n">Long</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">hashOperations</span><span class="o">.</span><span class="na">delete</span><span class="o">(</span><span class="n">CACHE_KEY</span><span class="o">,</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">id</span><span class="o">));</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">&#34;[PharmacyRedisTemplateService delete] id: {}&#34;</span><span class="o">,</span> <span class="n">id</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">String</span> <span class="nf">serializePharmacyDto</span><span class="o">(</span><span class="n">PharmacyDto</span> <span class="n">pharmacyDto</span><span class="o">)</span> <span class="kd">throws</span>   <span class="n">JsonProcessingException</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">objectMapper</span><span class="o">.</span><span class="na">writeValueAsString</span><span class="o">(</span><span class="n">pharmacyDto</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="n">PharmacyDto</span> <span class="nf">deserializePharmacyDto</span><span class="o">(</span><span class="n">String</span> <span class="n">value</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JsonProcessingException</span> <span class="o">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">objectMapper</span><span class="o">.</span><span class="na">readValue</span><span class="o">(</span><span class="n">value</span><span class="o">,</span> <span class="n">PharmacyDto</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>  
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></div><hr>
+<h1 id="_reference_"><em>Reference</em></h1>
+<p><a href="https://bcp0109.tistory.com/328">https://bcp0109.tistory.com/328</a></p>
+</article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://jiwonkkang.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://jiwonkkang.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://jiwonkkang.github.io/css/gitalk.css'>
+<script src='https://jiwonkkang.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '5a1c911a3bb5ff14fe5e',
+    clientSecret: '8586a43d9a15967e4760ef333ef31eab72c6d3ea',
+    repo: 'jiwonkkang.github.io',
+    owner: 'JiwonKKang',
+    admin: ['JiwonKKang'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://jiwonkkang.github.io/">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://jiwonkkang.github.io/js/github-style.js"></script>
+
+
+
+
+</html>

@@ -9,19 +9,19 @@
     <lastBuildDate>Sun, 17 Sep 2023 02:22:08 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[Java] Objects.requireNonNull()</title>
-      <link>https://jiwonkkang.github.io/post/java-requirenonnull/</link>
+      <link>https://jiwonkkang.github.io/post/java/java-requirenonnull/</link>
       <pubDate>Sun, 17 Sep 2023 02:22:08 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/java-requirenonnull/</guid>
+      <guid>https://jiwonkkang.github.io/post/java/java-requirenonnull/</guid>
       <description>Objects.requireNonNull()은 왜 사용해야 할까?</description>
     </item>
     
     <item>
       <title>[Java] Map의 computeIfAbsent</title>
-      <link>https://jiwonkkang.github.io/post/java-computeifabsent/</link>
+      <link>https://jiwonkkang.github.io/post/java/java-computeifabsent/</link>
       <pubDate>Sun, 27 Aug 2023 22:54:45 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/java-computeifabsent/</guid>
+      <guid>https://jiwonkkang.github.io/post/java/java-computeifabsent/</guid>
       <description>자바 Map의 메서드 computeIfAbsent에 대해 알아보자</description>
     </item>
     

@@ -9,46 +9,46 @@
     <lastBuildDate>Mon, 18 Sep 2023 18:47:36 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/error/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Redis 장애 Case 및 대응</title>
-      <link>https://jiwonkkang.github.io/post/redis-error-case/</link>
+      <link>https://jiwonkkang.github.io/post/redis/redis-error-case/</link>
       <pubDate>Mon, 18 Sep 2023 18:47:36 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/redis-error-case/</guid>
+      <guid>https://jiwonkkang.github.io/post/redis/redis-error-case/</guid>
       <description>Redis의 주요 장애 Case와 그에 따른 대응 방법을 알아보자</description>
     </item>
     
     <item>
       <title>도커 컨테이너로 배포중 삽질</title>
-      <link>https://jiwonkkang.github.io/post/deploy-docker/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/deploy-docker/</link>
       <pubDate>Sun, 13 Aug 2023 18:47:40 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/deploy-docker/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/deploy-docker/</guid>
       <description>도커 컨테이너로 서버 배포중에 에러들</description>
     </item>
     
     <item>
       <title>SpringBoot css 깨짐현상</title>
-      <link>https://jiwonkkang.github.io/post/spring-boot-css-error/</link>
+      <link>https://jiwonkkang.github.io/post/java/spring-boot-css-error/</link>
       <pubDate>Thu, 10 Aug 2023 20:12:58 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/spring-boot-css-error/</guid>
+      <guid>https://jiwonkkang.github.io/post/java/spring-boot-css-error/</guid>
       <description>스프링부트 css 깨짐현상</description>
     </item>
     
     <item>
       <title>Schema-validation: missing table [name] 에러</title>
-      <link>https://jiwonkkang.github.io/post/missing-table/</link>
+      <link>https://jiwonkkang.github.io/post/db/missing-table/</link>
       <pubDate>Thu, 10 Aug 2023 19:02:31 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/missing-table/</guid>
+      <guid>https://jiwonkkang.github.io/post/db/missing-table/</guid>
       <description>missing table error</description>
     </item>
     
     <item>
       <title>entrypoint-initdb.d sql파일을 못읽는 오류</title>
-      <link>https://jiwonkkang.github.io/post/entrypoint-initdb.d/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/entrypoint-initdb.d/</link>
       <pubDate>Thu, 10 Aug 2023 15:33:27 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/entrypoint-initdb.d/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/entrypoint-initdb.d/</guid>
       <description>entrypoint-initdb.d sql 파일을 못읽는 오류</description>
     </item>
     

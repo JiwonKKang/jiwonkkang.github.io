@@ -6,67 +6,76 @@
     <description>Recent content in programmers on Jiwon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Sun, 03 Dec 2023 14:17:59 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/programmers/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Dec 2023 23:48:41 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/programmers/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[프로그래머스] 피로도 - 자바</title>
+      <link>https://jiwonkkang.github.io/post/programmers/%ED%94%BC%EB%A1%9C%EB%8F%84/</link>
+      <pubDate>Sun, 03 Dec 2023 23:48:41 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/programmers/%ED%94%BC%EB%A1%9C%EB%8F%84/</guid>
+      <description>[프로그래머스] 피로도 Level 2 - 자바풀이</description>
+    </item>
+    
     <item>
       <title>[프로그래머스] 소수찾기 - 자바</title>
-      <link>https://jiwonkkang.github.io/post/programmers-findprime/</link>
+      <link>https://jiwonkkang.github.io/post/programmers/programmers-findprime/</link>
       <pubDate>Sun, 03 Dec 2023 14:17:59 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/programmers-findprime/</guid>
+      <guid>https://jiwonkkang.github.io/post/programmers/programmers-findprime/</guid>
       <description>[프로그래머스] 소수찾기 Level 2 - 자바풀이</description>
     </item>
     
     <item>
       <title>[프로그래머스] H-Index - 자바</title>
-      <link>https://jiwonkkang.github.io/post/programmers-hindex/</link>
+      <link>https://jiwonkkang.github.io/post/programmers/programmers-hindex/</link>
       <pubDate>Sun, 03 Dec 2023 01:37:28 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/programmers-hindex/</guid>
+      <guid>https://jiwonkkang.github.io/post/programmers/programmers-hindex/</guid>
       <description>[프로그래머스] H-Index Level 2 - 자바풀이</description>
     </item>
     
     <item>
       <title>[프로그래머스] 성격 유형 검사 - 자바</title>
-      <link>https://jiwonkkang.github.io/post/programmers-mbti/</link>
+      <link>https://jiwonkkang.github.io/post/programmers/programmers-mbti/</link>
       <pubDate>Sat, 02 Dec 2023 21:45:05 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/programmers-mbti/</guid>
+      <guid>https://jiwonkkang.github.io/post/programmers/programmers-mbti/</guid>
       <description>[프로그래머스] 성격 유형 검사 - 2022 KAKAO TECH INTERNSHIP</description>
     </item>
     
     <item>
       <title>[프로그래머스] 이중 우선순위큐 - 자바</title>
-      <link>https://jiwonkkang.github.io/post/programmers-doublequeue/</link>
+      <link>https://jiwonkkang.github.io/post/programmers/programmers-doublequeue/</link>
       <pubDate>Sat, 02 Dec 2023 21:45:05 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/programmers-doublequeue/</guid>
+      <guid>https://jiwonkkang.github.io/post/programmers/programmers-doublequeue/</guid>
       <description>[프로그래머스] 이중 우선순위 큐  Level 3 - 자바풀이</description>
     </item>
     
     <item>
       <title>[프로그래머스] 개인정보 수집 유효기간 - 자바</title>
-      <link>https://jiwonkkang.github.io/post/programmers-terms/</link>
+      <link>https://jiwonkkang.github.io/post/programmers/programmers-terms/</link>
       <pubDate>Sat, 02 Dec 2023 01:33:13 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/programmers-terms/</guid>
+      <guid>https://jiwonkkang.github.io/post/programmers/programmers-terms/</guid>
       <description>[프로그래머스] 개인정보 수집 유효기간 - 2023 KAKAO BLIND RECRUITMENT</description>
     </item>
     
     <item>
       <title>[프로그래머스] 디스크 컨트롤러 - 자바</title>
-      <link>https://jiwonkkang.github.io/post/programmers-disk/</link>
+      <link>https://jiwonkkang.github.io/post/programmers/programmers-disk/</link>
       <pubDate>Thu, 30 Nov 2023 19:26:15 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/programmers-disk/</guid>
+      <guid>https://jiwonkkang.github.io/post/programmers/programmers-disk/</guid>
       <description>프로그래머스 Level 3 디스크 컨트롤러 자바 풀이</description>
     </item>
     
     <item>
       <title>[프로그래머스] 공원산책 - 자바</title>
-      <link>https://jiwonkkang.github.io/post/programmers-gongwon/</link>
+      <link>https://jiwonkkang.github.io/post/programmers/programmers-gongwon/</link>
       <pubDate>Wed, 29 Nov 2023 21:19:24 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/programmers-gongwon/</guid>
+      <guid>https://jiwonkkang.github.io/post/programmers/programmers-gongwon/</guid>
       <description>프로그래머스 Level 1 공원 산책 문제</description>
     </item>
     

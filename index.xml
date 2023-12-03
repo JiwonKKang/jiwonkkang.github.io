@@ -6,238 +6,247 @@
     <description>Recent content on Jiwon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Sun, 03 Dec 2023 14:17:59 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Dec 2023 23:48:41 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[프로그래머스] 피로도 - 자바</title>
+      <link>https://jiwonkkang.github.io/post/programmers/%ED%94%BC%EB%A1%9C%EB%8F%84/</link>
+      <pubDate>Sun, 03 Dec 2023 23:48:41 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/programmers/%ED%94%BC%EB%A1%9C%EB%8F%84/</guid>
+      <description>[프로그래머스] 피로도 Level 2 - 자바풀이</description>
+    </item>
+    
     <item>
       <title>[프로그래머스] 소수찾기 - 자바</title>
-      <link>https://jiwonkkang.github.io/post/programmers-findprime/</link>
+      <link>https://jiwonkkang.github.io/post/programmers/programmers-findprime/</link>
       <pubDate>Sun, 03 Dec 2023 14:17:59 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/programmers-findprime/</guid>
+      <guid>https://jiwonkkang.github.io/post/programmers/programmers-findprime/</guid>
       <description>[프로그래머스] 소수찾기 Level 2 - 자바풀이</description>
     </item>
     
     <item>
       <title>[프로그래머스] H-Index - 자바</title>
-      <link>https://jiwonkkang.github.io/post/programmers-hindex/</link>
+      <link>https://jiwonkkang.github.io/post/programmers/programmers-hindex/</link>
       <pubDate>Sun, 03 Dec 2023 01:37:28 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/programmers-hindex/</guid>
+      <guid>https://jiwonkkang.github.io/post/programmers/programmers-hindex/</guid>
       <description>[프로그래머스] H-Index Level 2 - 자바풀이</description>
     </item>
     
     <item>
       <title>[프로그래머스] 성격 유형 검사 - 자바</title>
-      <link>https://jiwonkkang.github.io/post/programmers-mbti/</link>
+      <link>https://jiwonkkang.github.io/post/programmers/programmers-mbti/</link>
       <pubDate>Sat, 02 Dec 2023 21:45:05 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/programmers-mbti/</guid>
+      <guid>https://jiwonkkang.github.io/post/programmers/programmers-mbti/</guid>
       <description>[프로그래머스] 성격 유형 검사 - 2022 KAKAO TECH INTERNSHIP</description>
     </item>
     
     <item>
       <title>[프로그래머스] 이중 우선순위큐 - 자바</title>
-      <link>https://jiwonkkang.github.io/post/programmers-doublequeue/</link>
+      <link>https://jiwonkkang.github.io/post/programmers/programmers-doublequeue/</link>
       <pubDate>Sat, 02 Dec 2023 21:45:05 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/programmers-doublequeue/</guid>
+      <guid>https://jiwonkkang.github.io/post/programmers/programmers-doublequeue/</guid>
       <description>[프로그래머스] 이중 우선순위 큐  Level 3 - 자바풀이</description>
     </item>
     
     <item>
       <title>[프로그래머스] 개인정보 수집 유효기간 - 자바</title>
-      <link>https://jiwonkkang.github.io/post/programmers-terms/</link>
+      <link>https://jiwonkkang.github.io/post/programmers/programmers-terms/</link>
       <pubDate>Sat, 02 Dec 2023 01:33:13 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/programmers-terms/</guid>
+      <guid>https://jiwonkkang.github.io/post/programmers/programmers-terms/</guid>
       <description>[프로그래머스] 개인정보 수집 유효기간 - 2023 KAKAO BLIND RECRUITMENT</description>
     </item>
     
     <item>
       <title>[프로그래머스] 디스크 컨트롤러 - 자바</title>
-      <link>https://jiwonkkang.github.io/post/programmers-disk/</link>
+      <link>https://jiwonkkang.github.io/post/programmers/programmers-disk/</link>
       <pubDate>Thu, 30 Nov 2023 19:26:15 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/programmers-disk/</guid>
+      <guid>https://jiwonkkang.github.io/post/programmers/programmers-disk/</guid>
       <description>프로그래머스 Level 3 디스크 컨트롤러 자바 풀이</description>
     </item>
     
     <item>
       <title>[프로그래머스] 공원산책 - 자바</title>
-      <link>https://jiwonkkang.github.io/post/programmers-gongwon/</link>
+      <link>https://jiwonkkang.github.io/post/programmers/programmers-gongwon/</link>
       <pubDate>Wed, 29 Nov 2023 21:19:24 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/programmers-gongwon/</guid>
+      <guid>https://jiwonkkang.github.io/post/programmers/programmers-gongwon/</guid>
       <description>프로그래머스 Level 1 공원 산책 문제</description>
     </item>
     
     <item>
       <title>[Git] PR(Pull Request) 날리는 법</title>
-      <link>https://jiwonkkang.github.io/post/git-pr/</link>
+      <link>https://jiwonkkang.github.io/post/git/git-pr/</link>
       <pubDate>Wed, 11 Oct 2023 17:26:57 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/git-pr/</guid>
+      <guid>https://jiwonkkang.github.io/post/git/git-pr/</guid>
       <description>협업할때 Github Pull Request 날리는법</description>
     </item>
     
     <item>
       <title>Redis 장애 Case 및 대응</title>
-      <link>https://jiwonkkang.github.io/post/redis-error-case/</link>
+      <link>https://jiwonkkang.github.io/post/redis/redis-error-case/</link>
       <pubDate>Mon, 18 Sep 2023 18:47:36 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/redis-error-case/</guid>
+      <guid>https://jiwonkkang.github.io/post/redis/redis-error-case/</guid>
       <description>Redis의 주요 장애 Case와 그에 따른 대응 방법을 알아보자</description>
     </item>
     
     <item>
       <title>[Java] Objects.requireNonNull()</title>
-      <link>https://jiwonkkang.github.io/post/java-requirenonnull/</link>
+      <link>https://jiwonkkang.github.io/post/java/java-requirenonnull/</link>
       <pubDate>Sun, 17 Sep 2023 02:22:08 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/java-requirenonnull/</guid>
+      <guid>https://jiwonkkang.github.io/post/java/java-requirenonnull/</guid>
       <description>Objects.requireNonNull()은 왜 사용해야 할까?</description>
     </item>
     
     <item>
       <title>Redis-Sentitnel 구성</title>
-      <link>https://jiwonkkang.github.io/post/redis-sentinel-config/</link>
+      <link>https://jiwonkkang.github.io/post/redis/redis-sentinel-config/</link>
       <pubDate>Mon, 11 Sep 2023 09:48:08 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/redis-sentinel-config/</guid>
+      <guid>https://jiwonkkang.github.io/post/redis/redis-sentinel-config/</guid>
       <description>Redis-sentinel 구성하기</description>
     </item>
     
     <item>
       <title>Kafka란 무엇인가요?</title>
-      <link>https://jiwonkkang.github.io/post/kafka-basic/</link>
+      <link>https://jiwonkkang.github.io/post/java/kafka-basic/</link>
       <pubDate>Wed, 30 Aug 2023 00:05:13 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/kafka-basic/</guid>
+      <guid>https://jiwonkkang.github.io/post/java/kafka-basic/</guid>
       <description>분산 메세징 시스템 Kafka를 자세히 알아보자</description>
     </item>
     
     <item>
       <title>[Java] Map의 computeIfAbsent</title>
-      <link>https://jiwonkkang.github.io/post/java-computeifabsent/</link>
+      <link>https://jiwonkkang.github.io/post/java/java-computeifabsent/</link>
       <pubDate>Sun, 27 Aug 2023 22:54:45 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/java-computeifabsent/</guid>
+      <guid>https://jiwonkkang.github.io/post/java/java-computeifabsent/</guid>
       <description>자바 Map의 메서드 computeIfAbsent에 대해 알아보자</description>
     </item>
     
     <item>
       <title>[Git] Github Action 알아보기</title>
-      <link>https://jiwonkkang.github.io/post/github-action-immersion/</link>
+      <link>https://jiwonkkang.github.io/post/git/github-action-immersion/</link>
       <pubDate>Mon, 21 Aug 2023 09:44:52 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/github-action-immersion/</guid>
+      <guid>https://jiwonkkang.github.io/post/git/github-action-immersion/</guid>
       <description>Github Action을 통해 CI/CD를 해보자</description>
     </item>
     
     <item>
       <title>[Docker] Dockerfile - SpringBoot </title>
-      <link>https://jiwonkkang.github.io/post/docker-image-spring/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/docker-image-spring/</link>
       <pubDate>Fri, 18 Aug 2023 20:53:42 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/docker-image-spring/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/docker-image-spring/</guid>
       <description>SpringBoot에서 Dockerfile로 도커 이미지를 빌드해보자</description>
     </item>
     
     <item>
       <title>[Docker] 컨테이너 다루기</title>
-      <link>https://jiwonkkang.github.io/post/container-tutorial/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/container-tutorial/</link>
       <pubDate>Wed, 16 Aug 2023 20:14:00 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/container-tutorial/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/container-tutorial/</guid>
       <description>컨테이너를 파헤쳐보자</description>
     </item>
     
     <item>
       <title>[Docker] 유니온 파일 시스템</title>
-      <link>https://jiwonkkang.github.io/post/docker-ufs/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/docker-ufs/</link>
       <pubDate>Wed, 16 Aug 2023 11:51:28 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/docker-ufs/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/docker-ufs/</guid>
       <description>docker는 이미지를 어떻게 관리할까?</description>
     </item>
     
     <item>
       <title>Docker란 무엇일까?</title>
-      <link>https://jiwonkkang.github.io/post/what-docker/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/what-docker/</link>
       <pubDate>Mon, 14 Aug 2023 11:27:47 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/what-docker/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/what-docker/</guid>
       <description>Docker 파헤치기</description>
     </item>
     
     <item>
       <title>컨테이너 배포를 위한 AWS EC2 환경 세팅</title>
-      <link>https://jiwonkkang.github.io/post/ec2-docker-config/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/ec2-docker-config/</link>
       <pubDate>Mon, 14 Aug 2023 09:58:26 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/ec2-docker-config/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/ec2-docker-config/</guid>
       <description>프로젝트 배포를위해 EC2 콘솔에 배포환경을 세팅해보자</description>
     </item>
     
     <item>
       <title>도커 컨테이너로 배포중 삽질</title>
-      <link>https://jiwonkkang.github.io/post/deploy-docker/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/deploy-docker/</link>
       <pubDate>Sun, 13 Aug 2023 18:47:40 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/deploy-docker/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/deploy-docker/</guid>
       <description>도커 컨테이너로 서버 배포중에 에러들</description>
     </item>
     
     <item>
       <title>SpringBoot에서 Redis를 적용해보자</title>
-      <link>https://jiwonkkang.github.io/post/java-redis/</link>
+      <link>https://jiwonkkang.github.io/post/redis/java-redis/</link>
       <pubDate>Sat, 12 Aug 2023 23:26:47 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/java-redis/</guid>
+      <guid>https://jiwonkkang.github.io/post/redis/java-redis/</guid>
       <description>카카오API를 활용한 약국길찾기 서비스에 Redis를 적용해보자</description>
     </item>
     
     <item>
       <title>무중단 배포는 어떻게할까?</title>
-      <link>https://jiwonkkang.github.io/post/ci-cd/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/ci-cd/</link>
       <pubDate>Fri, 11 Aug 2023 09:25:40 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/ci-cd/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/ci-cd/</guid>
       <description>여러가지 배포의 종류를 알아보자</description>
     </item>
     
     <item>
       <title>SpringBoot css 깨짐현상</title>
-      <link>https://jiwonkkang.github.io/post/spring-boot-css-error/</link>
+      <link>https://jiwonkkang.github.io/post/java/spring-boot-css-error/</link>
       <pubDate>Thu, 10 Aug 2023 20:12:58 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/spring-boot-css-error/</guid>
+      <guid>https://jiwonkkang.github.io/post/java/spring-boot-css-error/</guid>
       <description>스프링부트 css 깨짐현상</description>
     </item>
     
     <item>
       <title>Schema-validation: missing table [name] 에러</title>
-      <link>https://jiwonkkang.github.io/post/missing-table/</link>
+      <link>https://jiwonkkang.github.io/post/db/missing-table/</link>
       <pubDate>Thu, 10 Aug 2023 19:02:31 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/missing-table/</guid>
+      <guid>https://jiwonkkang.github.io/post/db/missing-table/</guid>
       <description>missing table error</description>
     </item>
     
     <item>
       <title>entrypoint-initdb.d sql파일을 못읽는 오류</title>
-      <link>https://jiwonkkang.github.io/post/entrypoint-initdb.d/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/entrypoint-initdb.d/</link>
       <pubDate>Thu, 10 Aug 2023 15:33:27 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/entrypoint-initdb.d/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/entrypoint-initdb.d/</guid>
       <description>entrypoint-initdb.d sql 파일을 못읽는 오류</description>
     </item>
     
     <item>
       <title>[Git] Merge vs Squash vs Rebase</title>
-      <link>https://jiwonkkang.github.io/post/git-merge/</link>
+      <link>https://jiwonkkang.github.io/post/git/git-merge/</link>
       <pubDate>Thu, 10 Aug 2023 10:52:24 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/git-merge/</guid>
+      <guid>https://jiwonkkang.github.io/post/git/git-merge/</guid>
       <description>Git 다양한 Merge 방법</description>
     </item>
     

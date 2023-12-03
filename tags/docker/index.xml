@@ -9,64 +9,64 @@
     <lastBuildDate>Fri, 18 Aug 2023 20:53:42 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[Docker] Dockerfile - SpringBoot </title>
-      <link>https://jiwonkkang.github.io/post/docker-image-spring/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/docker-image-spring/</link>
       <pubDate>Fri, 18 Aug 2023 20:53:42 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/docker-image-spring/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/docker-image-spring/</guid>
       <description>SpringBoot에서 Dockerfile로 도커 이미지를 빌드해보자</description>
     </item>
     
     <item>
       <title>[Docker] 컨테이너 다루기</title>
-      <link>https://jiwonkkang.github.io/post/container-tutorial/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/container-tutorial/</link>
       <pubDate>Wed, 16 Aug 2023 20:14:00 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/container-tutorial/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/container-tutorial/</guid>
       <description>컨테이너를 파헤쳐보자</description>
     </item>
     
     <item>
       <title>[Docker] 유니온 파일 시스템</title>
-      <link>https://jiwonkkang.github.io/post/docker-ufs/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/docker-ufs/</link>
       <pubDate>Wed, 16 Aug 2023 11:51:28 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/docker-ufs/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/docker-ufs/</guid>
       <description>docker는 이미지를 어떻게 관리할까?</description>
     </item>
     
     <item>
       <title>Docker란 무엇일까?</title>
-      <link>https://jiwonkkang.github.io/post/what-docker/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/what-docker/</link>
       <pubDate>Mon, 14 Aug 2023 11:27:47 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/what-docker/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/what-docker/</guid>
       <description>Docker 파헤치기</description>
     </item>
     
     <item>
       <title>컨테이너 배포를 위한 AWS EC2 환경 세팅</title>
-      <link>https://jiwonkkang.github.io/post/ec2-docker-config/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/ec2-docker-config/</link>
       <pubDate>Mon, 14 Aug 2023 09:58:26 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/ec2-docker-config/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/ec2-docker-config/</guid>
       <description>프로젝트 배포를위해 EC2 콘솔에 배포환경을 세팅해보자</description>
     </item>
     
     <item>
       <title>도커 컨테이너로 배포중 삽질</title>
-      <link>https://jiwonkkang.github.io/post/deploy-docker/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/deploy-docker/</link>
       <pubDate>Sun, 13 Aug 2023 18:47:40 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/deploy-docker/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/deploy-docker/</guid>
       <description>도커 컨테이너로 서버 배포중에 에러들</description>
     </item>
     
     <item>
       <title>entrypoint-initdb.d sql파일을 못읽는 오류</title>
-      <link>https://jiwonkkang.github.io/post/entrypoint-initdb.d/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/entrypoint-initdb.d/</link>
       <pubDate>Thu, 10 Aug 2023 15:33:27 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/entrypoint-initdb.d/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/entrypoint-initdb.d/</guid>
       <description>entrypoint-initdb.d sql 파일을 못읽는 오류</description>
     </item>
     

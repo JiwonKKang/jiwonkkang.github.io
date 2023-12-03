@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://jiwonkkang.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/syntax.css' />
+    <title>Redis-Sentitnel 구성 - Jiwon&#39;s blog</title>
+    
+    <link rel="icon" type="image/x-icon" href='https://jiwonkkang.github.io/images/favicon.ico'>
+    
+    <meta name="theme-color" content="#1e2327">
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RHFSNZ7DGH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RHFSNZ7DGH');
+</script>
+    
+    <meta name="description"
+  content="Redis-sentinel 구성하기" />
+<meta name="keywords"
+  content='' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jiwonkkang.github.io/post/redis/redis-sentinel-config/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Redis-Sentitnel 구성 - Jiwon&#39;s blog" />
+<meta name="twitter:description"
+  content="Redis-sentinel 구성하기" />
+<meta name="twitter:site" content="https://jiwonkkang.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://jiwonkkang.github.io/">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Redis-Sentitnel 구성 - Jiwon&#39;s blog">
+<meta property="og:description"
+  content="Redis-sentinel 구성하기" />
+<meta property="og:url" content="https://jiwonkkang.github.io/post/redis/redis-sentinel-config/" />
+<meta property="og:site_name" content="Redis-Sentitnel 구성" />
+<meta property="og:image"
+  content="https://jiwonkkang.github.io/">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2023-09-11 09:48:08 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://jiwonkkang.github.io/">
+        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://jiwonkkang.github.io/">
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://jiwonkkang.github.io/">
+        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+          width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://jiwonkkang.github.io/">
+                  <img class=" avatar-user"
+                    src="https://jiwonkkang.github.io/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://jiwonkkang.github.io/">JiwonKKang</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://jiwonkkang.github.io/post/redis/redis-sentinel-config/">Redis-Sentitnel 구성</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Mon, 11 Sep 2023 09:48:08 &#43;0900"
+                    class="no-wrap">
+                    Mon, 11 Sep 2023 09:48:08 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Mon, 11 Sep 2023 10:49:03 &#43;0900"
+                    class="no-wrap">
+                    Mon, 11 Sep 2023 10:49:03 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1639 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/redis">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      redis
+                    </a>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><blockquote>
+<h1 id="redis-sentinel이란">Redis sentinel이란?</h1>
+</blockquote>
+<p>운영환경에서 레디스는 일반적으로 마스터와 복제로 구성됩니다.   운영중 예기치 않게 마스터가 다운되었다면, 관리자가 이를 감지해서 복제를 마스터로 올리고 클라이언트들이 새로운 마스터에 접속할 수 있도록 해 주어야 합니다.  </p>
+<p>센티널은 마스터와 복제를 감시하고 있다가 마스터가 다운되면 이를 감지해서 관리자의 개입없이 자동으로 복제를 마스터로 올려줍니다.</p>
+<p>센티널은 다음과 같은 기능을 합니다.</p>
+<ul>
+<li>
+<p><strong>모니터링 Monitoring</strong> : 센티널은 레디스 마스터, 복제들을 제대로 동작하는지 지속적으로 감시합니다.</p>
+</li>
+<li>
+<p><strong>자동 장애조치 Automatic Failover</strong> : 센티널은 레디스 마스터가 예기치 않게 다운되었을 때 복제를 새로운 마스터로 승격시켜 줍니다.   그리고 복제가 여러 대 있을 경우 이 복제들이 새로운 마스터로 부터 데이터를 받을 수 있도록 재 구성하고, 다운된 마스터가 재 시작했을 때 복제로 전환되어 새로운 마스터를 바라볼 수 있도록 합니다.</p>
+</li>
+<li>
+<p><strong>알림 Notification</strong> : 센티널은 감시하고 있는 레디스 인스턴스들이 failover 되었을 때 Pub/Sub으로 Application(client)에게 알리거나 shell script로 관리자에게 이메일이나 SMS로 알릴 수 있습니다.</p>
+</li>
+</ul>
+<p>우선 Redis와 Sentinel은 아래와 같이 동작합니다.</p>
+<blockquote>
+<p>정상 운영시</p>
+</blockquote>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb879Y4%2Fbtq16tHGvXM%2FQzvi5VCOIcLkPNvnYp7NsK%2Fimg.png" alt=""></p>
+<blockquote>
+<p>한대 장애시</p>
+</blockquote>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb6XTsx%2Fbtq2clOKSLF%2FAB0KRcR2VvhMiOrUQ1XFp1%2Fimg.png" alt=""></p>
+<blockquote>
+<p>장애 서버 복구시</p>
+</blockquote>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fdbx7PG%2Fbtq18EhvJHC%2Fj9ZlHSKGnTFOKdM7EdKGP1%2Fimg.png" alt=""></p>
+<blockquote>
+<h1 id="준비">준비</h1>
+</blockquote>
+<p>일단 클라우드 플랫폼을 통해 VM을 3개 만들어줍니다.</p>
+<p>VM 2대에</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install redis-server
+</span></span><span class="line"><span class="cl">sudo apt-get install redis-sentinel
+</span></span></code></pre></div><p>을 통해 Redis와 Sentinel을 설치해줍니다.</p>
+<p>redis와 sentinel은 port만 다르다면 정삭적으로 동작합니다.</p>
+<p>하지만 서로 다른 머신에 설치하고 운영하는게 좀더 바람직하다고 생각합니다.</p>
+<p>그리고 남은 VM 1대에는 sentinel만 설치해줍니다.(어플리케이션 서버)</p>
+<blockquote>
+<h1 id="redis-설정">Redis 설정</h1>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vi /etc/redis/redis.conf
+</span></span></code></pre></div><p>를 통해 redis 설정파일로 들어가줍니다.</p>
+<p>일단 VM들끼리 서로 통신할수있게 네트워크 설정을 해줘야합니다.</p>
+<h4 id="bind">BIND</h4>
+<p>Bind로 하나 또는 여러 개의 IP를 지정할 수 있습니다. 이 경우 지정한 IP로만 레디스 서버에 접속할 수 있습니다.   Bind 지시자를 지정하지 않으면 서버에서 사용 가능한 모든 네트워크 인터페이스로 접속을 허용합니다.</p>
+<p><em><em>bind 192.168.1.100 127.0.0.1<br>
+bind 127.0.0.1 ::1   -&gt; 로칼 접속만 허용할 경우<br>
+bind * -::</em>   -&gt; 모든 접속을 허용할 경우 설정(Redis 6.2부터 가능)</em>*</p>
+<p>여기서는</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">bind</span> 0.0.0.0
+</span></span></code></pre></div><p>으로 모든 IP에 대해서 허용해주도록 하겠습니다.</p>
+<h4 id="replicaof">REPLICAOF</h4>
+<p>Master-Replica 복제.<br>
+Replicaof 지시자(명령)을 사용해서 레디스 서버의 복제본을 만들 수 있습니다. 
+<img src="http://redisgate.kr/images/server/redos_conf_replica.png" alt=""></p>
+<ul>
+<li>복제는 비동기이지만 지정한 수의 복제가 실행되지 못하면 마스터 서버가 더 이상 데이터를 받아들이지 않게 설정할 수 있습니다.</li>
+<li>마스터와 복제 서버간 짧은 시간 연결이 끊겼을 경우 부분 재동기를 할 수 있습니다. 복제 백로그 크기(replication backlog size)를 조정해서 부준 재동기 시간을 간접적으로 조정할 수 있습니다.</li>
+<li>복제는 자동으로 사용자의 개입이 필요하지 않습니다. 복제 서버가 마스터에 재 연결되면 자동으로 복제를 수행합니다.</li>
+</ul>
+<p>replicaof [masterip] [masterport]</p>
+<p>를 Replica VM에 설정해줍니다.</p>
+<blockquote>
+<p>Sentinel 설정</p>
+</blockquote>
+<p>다음으로는 sentinel 설정입니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">vi /etc/redis/sentinel.conf
+</span></span></code></pre></div><p>로 sentinel 설정 파일에 들어갈수 있습니다.</p>
+<p>여기서도 redis 설정과 마찬가지로</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">bind</span> 0.0.0.0 
+</span></span></code></pre></div><p>으로 모든 IP에 대해 허용해주도록 하겠습니다.</p>
+<p>또한 Sentienl에서는 모니터링할 master redis에 대한 추가적인 설정이 필요합니다.</p>
+<h4 id="sentinel-monitor">SENTINEL MONITOR</h4>
+<p>센티널이 레디스 마스터 서버를 모니터하도록 지정합니다.</p>
+<p>센티널은 여러 개의 마스터를 모니터 할 수 있습니다.</p>
+<p>복제 노드를 모니터하지 마세요. 복제 노드 정보는 마스터에서 가져옵니다. master-name은 임의로 지정할 수 있고 중복할 수 없습니다.<br>
+master-name은 알파벳 대소문자, 숫자와 &ldquo;.-_&ldquo;를 사용할 수 있습니다.</p>
+<p>quorum(쿼럼)은 레디스 마스터 서버가 다운되었을 때 몇 개의 센티널이 다운되었는지 인지해야 객관적으로 다운되었다고 판정하는 기준입니다.</p>
+<p>sentinel monitor [master-name] [redis-ip] [redis-port] [quorum]</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sentinel monitor mymaster 127.0.0.1 <span class="m">6379</span> <span class="m">2</span>
+</span></span></code></pre></div><blockquote>
+<p>참고</p>
+</blockquote>
+<pre tabindex="0"><code>추가로 클라우드 플랫폼의 VM을 이용했기때문에 플랫폼에서 각 포트에 대한 방화벽을 열어 주셔야
+VM끼리 통신 할 수 있습니다.
+</code></pre><blockquote>
+<h1 id="failover-테스트">Failover 테스트</h1>
+</blockquote>
+<p>이렇게 까지 설정을 완료했다면 master redis가 장애가 났을때 Sentinel들이 이를 감지하고
+Failover를 통해 master-replica를 서로 바꾸는지 테스트해보도록 합시다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tail -f /var/log/redis/redis-server.log
+</span></span><span class="line"><span class="cl">tail -f /var/log/redis/redis-sentinel.log
+</span></span></code></pre></div><p>위 2개의 명령어를 통해 각 로그를 확인 할 수 있습니다.</p>
+<blockquote>
+<p><em>출처</em></p>
+</blockquote>
+<p><a href="https://co-de.tistory.com/15">https://co-de.tistory.com/15</a>
+<a href="http://redisgate.kr/redis/server/redis_conf_han.php">http://redisgate.kr/redis/server/redis_conf_han.php</a>
+<a href="http://redisgate.jp/redis/sentinel/sentinel_conf_han.php">http://redisgate.jp/redis/sentinel/sentinel_conf_han.php</a></p>
+</article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://jiwonkkang.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://jiwonkkang.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://jiwonkkang.github.io/css/gitalk.css'>
+<script src='https://jiwonkkang.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '5a1c911a3bb5ff14fe5e',
+    clientSecret: '8586a43d9a15967e4760ef333ef31eab72c6d3ea',
+    repo: 'jiwonkkang.github.io',
+    owner: 'JiwonKKang',
+    admin: ['JiwonKKang'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://jiwonkkang.github.io/">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://jiwonkkang.github.io/js/github-style.js"></script>
+
+
+
+
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://jiwonkkang.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/syntax.css' />
+    <title>[Git] Github Action 알아보기 - Jiwon&#39;s blog</title>
+    
+    <link rel="icon" type="image/x-icon" href='https://jiwonkkang.github.io/images/favicon.ico'>
+    
+    <meta name="theme-color" content="#1e2327">
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RHFSNZ7DGH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RHFSNZ7DGH');
+</script>
+    
+    <meta name="description"
+  content="Github Action을 통해 CI/CD를 해보자" />
+<meta name="keywords"
+  content='' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jiwonkkang.github.io/post/git/github-action-immersion/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="[Git] Github Action 알아보기 - Jiwon&#39;s blog" />
+<meta name="twitter:description"
+  content="Github Action을 통해 CI/CD를 해보자" />
+<meta name="twitter:site" content="https://jiwonkkang.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://jiwonkkang.github.io/">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="[Git] Github Action 알아보기 - Jiwon&#39;s blog">
+<meta property="og:description"
+  content="Github Action을 통해 CI/CD를 해보자" />
+<meta property="og:url" content="https://jiwonkkang.github.io/post/git/github-action-immersion/" />
+<meta property="og:site_name" content="[Git] Github Action 알아보기" />
+<meta property="og:image"
+  content="https://jiwonkkang.github.io/">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2023-08-21 09:44:52 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://jiwonkkang.github.io/">
+        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://jiwonkkang.github.io/">
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://jiwonkkang.github.io/">
+        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+          width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://jiwonkkang.github.io/">
+                  <img class=" avatar-user"
+                    src="https://jiwonkkang.github.io/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://jiwonkkang.github.io/">JiwonKKang</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://jiwonkkang.github.io/post/git/github-action-immersion/">[Git] Github Action 알아보기</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Mon, 21 Aug 2023 09:44:52 &#43;0900"
+                    class="no-wrap">
+                    Mon, 21 Aug 2023 09:44:52 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Mon, 21 Aug 2023 09:49:02 &#43;0900"
+                    class="no-wrap">
+                    Mon, 21 Aug 2023 09:49:02 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      2103 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/git">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      git
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/ci/cd">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      ci/cd
+                    </a>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><blockquote>
+<h1 id="github-actions-이해">GitHub Actions 이해</h1>
+</blockquote>
+<h2 id="overview">Overview</h2>
+<p>GitHub Actions는 빌드, 테스트 및 배포 파이프라인을 자동화할 수 있는 지속적 통합 및 지속적 배포(CI/CD) 플랫폼입니다. 리포지토리에 대한 모든 pull request를 빌드 및 테스트하는 workflows를 생성하거나 merge된 pull request를 프로덕션에 배포할 수 있습니다. GitHub Actions는 DevOps를 넘어 리포지토리에서 다른 이벤트가 발생할 때 workflows를 실행할 수 있습니다. 예를 들어 누군가 저장소에 새 issue를 생성할 때마다 적절한 레이블을 자동으로 추가하는 workflows를 실행할 수 있습니다. GitHub는 Linux, Windows 및 macOS 가상 머신을 제공하여 workflows를 실행하거나 자체 데이터 센터 또는 클라우드 인프라에서 self-hosted runners를 호스팅할 수 있습니다.</p>
+<h2 id="the-components-of-github-actions">The components of GitHub Actions</h2>
+<p>pull request가 열리거나 issue가 생성되는 등 리포지토리에서 이벤트가 발생할 때 트리거되도록 GitHub Actions _workflow_를 구성할 수 있습니다. workflows에는 순차적으로 또는 병렬로 실행할 수 있는 하나 이상의 job이 포함되어 있습니다. 각 job은 virtual machine <em>runner</em> 또는 컨테이너 내부에서 실행되며 정의한 스크립트를 실행하거나 workflows를 단순화할 수 있는 재사용 가능한 extension인 _action_을 실행하는 하나 이상의 steps가 있습니다.</p>
+<p><img src="/images/github-action-immesion/components.png" alt=""></p>
+<h3 id="workflows">Workflows</h3>
+<p>workflow<strong>는 하나 이상의 jobs을 실행하는 구성 가능한 자동화 프로세스입니다.</strong> workflow<strong>는</strong> repository<strong>에 체크인한 YAML 파일에 의해 정의되며</strong> repository<strong>의 이벤트에 의해 트리거될 때 실행되거나 수동으로 또는 정의된 일정에 따라 트리거될 수 있습니다.</strong></p>
+<p>Workflows<strong>는</strong> repository<strong>의</strong> <code>.github/workflows</code> <strong>디렉터리에 정의되며,</strong> repository<strong>에는 각각 다른 task set을 수행할 수 있는 여러</strong> workflows<strong>가 있을 수 있습니다. 예를 들어</strong> pull requests<strong>를 작성하고 테스트하는 하나의</strong> workflow**, release가 생성될 때마다 애플리케이션을 배포하는 또 다른 workflow, 누군가 새 issue를 열 때마다 label을 추가하는 또 다른 workflow를 가질 수 있습니다.**</p>
+<p><strong>다른 workflow 내에서 다른 workflow를 참조할 수 있습니다. 자세한 내용은</strong> &ldquo;<a href="https://docs.github.com/en/actions/using-workflows/reusing-workflows">Reusing workflows</a>.&rdquo;<strong>을 참조하십시오.</strong></p>
+<p>workflows<strong>에 대한 자세한 내용은</strong> &ldquo;<a href="https://docs.github.com/en/actions/using-workflows">Using workflows</a>.&rdquo;<strong>를 참조하십시오.</strong></p>
+<h3 id="events">Events</h3>
+<p>event는 workflow run을 트리거하는 repository의 특정 활동입니다. 예를 들어 누군가 pull request을 생성하거나 issue를 open하거나 repository에 commit을 push할 때 활동이 GitHub에서 시작될 수 있습니다. <a href="https://docs.github.com/en/rest/repos#create-a-repository-dispatch-event">REST API에 post</a>하거나 수동으로 일정에 따라 실행되도록 workflow를 트리거할 수도 있습니다.</p>
+<p>worflows를 트리거하는 데 사용할 수 있는 전체 event list는 <a href="https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows">Events that trigger workflows</a>를 참조하세요.</p>
+<h3 id="jobs">Jobs</h3>
+<p>job은 동일한 runner에서 실행되는 workflow에 있는 steps의 집합입니다. 각 step는 실행될 쉘 스크립트이거나 실행될 action입니다. steps는 순서대로 실행되며 서로 의존적입니다. 각 step은 동일한 runner에서 실행되므로 한 step에서 다른 step으로 데이터를 공유할 수 있습니다. 예를 들어 애플리케이션을 빌드하는 단계 뒤에 빌드된 애플리케이션을 테스트하는 단계가 있을 수 있습니다.</p>
+<p>job과 다른 job들의 의존성을 구성할 수 있습니다. 기본적으로 job에는 의존성이 없으며 서로 병렬로 실행됩니다. job이 다른 job에 의존되면 의존 job이 완료될 때까지 기다렸다가 실행합니다. 예를 들어 의존성이 없는 서로 다른 아키텍처에 대한 여러 빌드 job들과 이러한 job들에 종속된 패키징 job이 있을 수 있습니다. 빌드 job은 병렬로 실행되며 모두 성공적으로 완료되면 패키징 job이 실행됩니다.</p>
+<p>작업에 대한 자세한 내용은 &ldquo;<a href="https://docs.github.com/en/actions/using-jobs">Using jobs</a>.&ldquo;을 참조하십시오.</p>
+<h3 id="actions">Actions</h3>
+<p>action은 복잡하지만 자주 반복되는 task를 수행하는 GitHub Actions platform용 커스텀 애플리케이션입니다. action을 사용하여 workflow 파일에 작성하는 반복 코드의 양을 줄이는 데 도움이 됩니다. action은 GitHub에서 git repository를 가져오거나, 빌드 환경에 대한 올바른 툴체인을 설정하거나, 클라우드 공급자에 대한 인증을 설정할 수 있습니다.</p>
+<p>고유한 actions를 작성하거나 GitHub Marketplace의 workflows에서 사용할 actions를 찾을 수 있습니다.</p>
+<p>자세한 내용은 &ldquo;<a href="https://docs.github.com/en/actions/creating-actions">Creating actions</a>.&ldquo;를 참조하십시오.</p>
+<h3 id="runners">Runners</h3>
+<p>runner는 트리거될 때 workflows를 실행하는 server입니다. 각 runner는 한 번에 하나의 job을 실행할 수 있습니다. GitHub는 Ubuntu Linux, Microsoft Windows 및 macOS runner를 제공하여 workflow를 실행합니다. 각 workflow run은 새로 프로비저닝된 새로운 가상 머신에서 실행됩니다. GitHub는 또한 larger configurations에서 사용할 수 있는 larger runners를 제공합니다. 자세한 내용은 &ldquo;<a href="https://docs.github.com/en/actions/using-github-hosted-runners/using-larger-runners">About larger runners</a>.&ldquo;를 참조하십시오. 다른 운영 체제가 필요하거나 특정 하드웨어 구성이 필요한 경우 자체 runner를 host할 수 있습니다. self-hosted runners에 대한 자세한 내용은 &ldquo;<a href="https://docs.github.com/en/actions/hosting-your-own-runners">Hosting your own runners</a>.&ldquo;을 참조하십시오.</p>
+</article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://jiwonkkang.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://jiwonkkang.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://jiwonkkang.github.io/css/gitalk.css'>
+<script src='https://jiwonkkang.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '5a1c911a3bb5ff14fe5e',
+    clientSecret: '8586a43d9a15967e4760ef333ef31eab72c6d3ea',
+    repo: 'jiwonkkang.github.io',
+    owner: 'JiwonKKang',
+    admin: ['JiwonKKang'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://jiwonkkang.github.io/">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://jiwonkkang.github.io/js/github-style.js"></script>
+
+
+
+
+</html>

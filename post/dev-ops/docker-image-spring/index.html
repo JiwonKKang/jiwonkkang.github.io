@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://jiwonkkang.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/syntax.css' />
+    <title>[Docker] Dockerfile - SpringBoot  - Jiwon&#39;s blog</title>
+    
+    <link rel="icon" type="image/x-icon" href='https://jiwonkkang.github.io/images/favicon.ico'>
+    
+    <meta name="theme-color" content="#1e2327">
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RHFSNZ7DGH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RHFSNZ7DGH');
+</script>
+    
+    <meta name="description"
+  content="SpringBoot에서 Dockerfile로 도커 이미지를 빌드해보자" />
+<meta name="keywords"
+  content='' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jiwonkkang.github.io/post/dev-ops/docker-image-spring/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="[Docker] Dockerfile - SpringBoot  - Jiwon&#39;s blog" />
+<meta name="twitter:description"
+  content="SpringBoot에서 Dockerfile로 도커 이미지를 빌드해보자" />
+<meta name="twitter:site" content="https://jiwonkkang.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://jiwonkkang.github.io/">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="[Docker] Dockerfile - SpringBoot  - Jiwon&#39;s blog">
+<meta property="og:description"
+  content="SpringBoot에서 Dockerfile로 도커 이미지를 빌드해보자" />
+<meta property="og:url" content="https://jiwonkkang.github.io/post/dev-ops/docker-image-spring/" />
+<meta property="og:site_name" content="[Docker] Dockerfile - SpringBoot " />
+<meta property="og:image"
+  content="https://jiwonkkang.github.io/">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2023-08-18 20:53:42 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://jiwonkkang.github.io/">
+        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://jiwonkkang.github.io/">
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://jiwonkkang.github.io/">
+        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+          width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://jiwonkkang.github.io/">
+                  <img class=" avatar-user"
+                    src="https://jiwonkkang.github.io/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://jiwonkkang.github.io/">JiwonKKang</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://jiwonkkang.github.io/post/dev-ops/docker-image-spring/">[Docker] Dockerfile - SpringBoot </a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Fri, 18 Aug 2023 20:53:42 &#43;0900"
+                    class="no-wrap">
+                    Fri, 18 Aug 2023 20:53:42 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Fri, 18 Aug 2023 21:53:38 &#43;0900"
+                    class="no-wrap">
+                    Fri, 18 Aug 2023 21:53:38 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      1309 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/docker">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      docker
+                    </a>
+                    
+                    <a class="muted-link mr-3" href="/tags/spring">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      spring
+                    </a>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><blockquote>
+<h1 id="a-better-dockerfile">A Better Dockerfile</h1>
+</blockquote>
+<p>Spring Boot fat JAR은 JAR 자체가 패키징되는 방식 때문에 자연스럽게 “layers&quot;를 갖습니다.<br>
+먼저 압축을 풀면 이미 외부 종속성과 내부 종속성이 구분되어 있습니다.<br>
+Docker 빌드의 한 단계에서 이 작업을 수행하려면 먼저 JAR의 압축을 풀어야 합니다.<br>
+다음 명령은 Spring Boot fat JAR의 압축을 풉니다.</p>
+<p>압축해제</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir build/dependency 
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> build/dependency 
+</span></span><span class="line"><span class="cl">jar -xf ../libs/sbb-<span class="o">{</span>버전넘버<span class="o">}</span>.jar
+</span></span></code></pre></div><p><strong>Dockerfile</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> eclipse-temurin:17-jdk-alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">VOLUME</span><span class="s"> /tmp</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ARG</span> <span class="nv">DEPENDENCY</span><span class="o">=</span>build/dependency<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> <span class="si">${</span><span class="nv">DEPENDENCY</span><span class="si">}</span>/BOOT-INF/lib /app/lib<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> <span class="si">${</span><span class="nv">DEPENDENCY</span><span class="si">}</span>/META-INF /app/META-INF<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> <span class="si">${</span><span class="nv">DEPENDENCY</span><span class="si">}</span>/BOOT-INF/classes /app<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;java&#34;</span><span class="p">,</span><span class="s2">&#34;-cp&#34;</span><span class="p">,</span><span class="s2">&#34;app:app/lib/*&#34;</span><span class="p">,</span><span class="s2">&#34;com.mygroup.sbb.SbbApplication&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></div><p>도커 이미지 빌드</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t sbb .
+</span></span></code></pre></div><p>도커 컨테이너 실행</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -p 8080:8080  sbb
+</span></span></code></pre></div><p>**이제 세 개의 계층이 있으며 모든 애플리케이션 리소스는 이후 두 계층에 있습니다.
+응용 프로그램 종속성이 변경되지 않으면 첫 번째 계층(BOOT-INF/lib에서)을 변경할 필요가 없으므로
+기본 계층이 이미 캐시되어 있는 한 빌드가 더 빠르고 런타임 시 컨테이너 시작도 더 빠릅니다. **</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<blockquote>
+<h2 id="spring-boot-layer-index">Spring Boot Layer Index</h2>
+</blockquote>
+<p><strong>Spring Boot 2.3.0부터 Spring Boot Maven 또는 Gradle 플러그인으로 빌드된 JAR 파일에는 JAR 파일에 레이어 정보가 포함됩니다.
+이 계층 정보는 응용 프로그램 빌드 간에 변경될 가능성에 따라 응용 프로그램의 일부를 구분합니다. 이를 사용하여 Docker 이미지 레이어를 더욱 효율적으로 만들 수 있습니다.</strong></p>
+<p>**레이어 정보는 JAR 콘텐츠를 각 레이어의 디렉터리로 추출하는 데 사용할 수 있습니다. **</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir build/extracted
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">java -Djarmode<span class="o">=</span>layertools -jar build/libs/sbb-<span class="o">{</span>버전넘버<span class="o">}</span>.jar extract --destination build/extracted
+</span></span></code></pre></div><p><code>Dockerfile</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">FROM eclipse-temurin:17-jdk-alpine
+</span></span><span class="line"><span class="cl">VOLUME /tmp
+</span></span><span class="line"><span class="cl">ARG <span class="nv">EXTRACTED</span><span class="o">=</span>build/extracted
+</span></span><span class="line"><span class="cl">COPY <span class="si">${</span><span class="nv">EXTRACTED</span><span class="si">}</span>/dependencies/ ./
+</span></span><span class="line"><span class="cl">COPY <span class="si">${</span><span class="nv">EXTRACTED</span><span class="si">}</span>/spring-boot-loader/ ./
+</span></span><span class="line"><span class="cl">COPY <span class="si">${</span><span class="nv">EXTRACTED</span><span class="si">}</span>/snapshot-dependencies/ ./
+</span></span><span class="line"><span class="cl">COPY <span class="si">${</span><span class="nv">EXTRACTED</span><span class="si">}</span>/application/ ./
+</span></span><span class="line"><span class="cl">ENTRYPOINT <span class="o">[</span><span class="s2">&#34;java&#34;</span>,<span class="s2">&#34;org.springframework.boot.loader.JarLauncher&#34;</span><span class="o">]</span>
+</span></span></code></pre></div><p>도커 이미지 빌드</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t sbb .
+</span></span></code></pre></div><p>도커 컨테이너 실행</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -p 8080:8080  sbb
+</span></span></code></pre></div><!-- raw HTML omitted -->
+<pre tabindex="0"><code> 💡 Spring Boot Fat `JarLauncher`는 JAR에서 이미지로 추출되므로 기본 애플리케이션 클래스를 하드 코딩하지 않고 애플리케이션을 시작하는 데 사용할 수 있습니다.
+</code></pre><!-- raw HTML omitted -->
+<blockquote>
+<h2 id="multi-stage-build---dependecy">Multi-Stage Build - DEPENDECY</h2>
+</blockquote>
+<p>위에서 만든 Dockerfile은 fat JAR이 이미 command line에서 빌드되었다고 가정했습니다.
+multi-stage 빌드를 사용하고 한 이미지에서 다른 이미지로 결과를 복사하여
+docker에서 해당 단계를 수행할 수도 있습니다.</p>
+<p>다음 예제에서는 Gradle을 사용하여 이를 수행합니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-docker" data-lang="docker"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> eclipse-temurin:17-jdk-alpine as build</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /workspace/app</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> gradlew .<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> .gradle .gradle<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> gradle gradle<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> build.gradle .<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> settings.gradle .<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> src src<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> ./gradlew build -x test<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> mkdir build/dependency <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="nb">cd</span> build/dependency<span class="p">;</span> jar -xf ../libs/sbb-<span class="o">{</span>버전정보<span class="o">}</span>.jar<span class="o">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> eclipse-temurin:17-jdk-alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">VOLUME</span><span class="s"> /tmp</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ARG</span> <span class="nv">DEPENDENCY</span><span class="o">=</span>/workspace/app/build/dependency<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>build <span class="si">${</span><span class="nv">DEPENDENCY</span><span class="si">}</span>/BOOT-INF/lib /app/lib<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>build <span class="si">${</span><span class="nv">DEPENDENCY</span><span class="si">}</span>/META-INF /app/META-INF<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>build <span class="si">${</span><span class="nv">DEPENDENCY</span><span class="si">}</span>/BOOT-INF/classes /app<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;java&#34;</span><span class="p">,</span><span class="s2">&#34;-cp&#34;</span><span class="p">,</span><span class="s2">&#34;app:app/lib/*&#34;</span><span class="p">,</span><span class="s2">&#34;com.mygroup.sbb.SbbApplication&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></div><p>도커 이미지 빌드</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker build -t sbb .
+</span></span></code></pre></div><p>도커 컨테이너 실행</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">docker run -p 8080:8080  sbb
+</span></span></code></pre></div><!-- raw HTML omitted -->
+<blockquote>
+<h2 id="multi-stage-build---extract">Multi-Stage Build - EXTRACT</h2>
+</blockquote>
+<p>이번엔 jar파일의 extract를 사용하여 레이어를 추출하고 그 레이어들을 이용해서
+Docker image를 Multi-Stage build로 만들어보겠습니다.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> eclipse-temurin:17-jdk-alpine as build  </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /workspace/app  </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> gradlew .               <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> .gradle .gradle  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> gradle gradle  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> build.gradle .  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> settings.gradle .docker  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> src src  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> ./gradlew build -x <span class="nb">test</span>  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> mkdir build/extracted <span class="o">&amp;&amp;</span> <span class="o">(</span>java -Djarmode<span class="o">=</span>layertools -jar build/libs/sbb-0.0.8.jar extract --destination build/extracted<span class="o">)</span>  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> eclipse-temurin:17-jdk-alpine  </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">VOLUME</span><span class="s"> /tmp  </span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ARG</span> <span class="nv">EXTRACTED</span><span class="o">=</span>/workspace/app/build/extracted  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>build <span class="si">${</span><span class="nv">EXTRACTED</span><span class="si">}</span>/dependencies/ ./  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>build <span class="si">${</span><span class="nv">EXTRACTED</span><span class="si">}</span>/spring-boot-loader/ ./  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>build <span class="si">${</span><span class="nv">EXTRACTED</span><span class="si">}</span>/snapshot-dependencies/ ./  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>build <span class="si">${</span><span class="nv">EXTRACTED</span><span class="si">}</span>/application/ ./  <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;java&#34;</span><span class="p">,</span><span class="s2">&#34;org.springframework.boot.loader.JarLauncher&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></div><p>위 코드를 간략히 설명하자면</p>
+<p><strong>스테이지 1</strong></p>
+<ol>
+<li>베이스이미지 eclipse-temurin:17-jdk-alpine로 설정</li>
+<li>디렉토리를 /workspace/app 이동(cd와는 레이어가 생기지않는다는 차이점이있습니다)</li>
+<li>빌드에 필요한 파일들 모두 컨테이너에 COPY</li>
+<li>테스트는 제외하고 빌드</li>
+<li>build/extracted 디렉토리를 만들고 그곳에 레이어 추출</li>
+</ol>
+<p><strong>스테이지 2</strong></p>
+<ol>
+<li>베이스이미지 eclipse-temurin:17-jdk-alpine로 설정</li>
+<li>컨테이너의 /tmp를 볼륨으로 설정</li>
+<li>매개변수 경로 설정 EXTRACTED=/workspace/app/build/extracted</li>
+<li>스테이지1에서 만들어진 이미지에서 레이어들 COPY</li>
+<li>엔트리포인트 실행</li>
+</ol>
+<p>이렇게하면 빌드에만 필요한 파일(스테이지1)들을 도커이미지(스테이지2)에 넣지않기때문에
+도커 이미지를 경량화 시킬수있고 도커이미지가 경량화되면 빌드 및 배포가 빨라질 수 있습니다.</p>
+</article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://jiwonkkang.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://jiwonkkang.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://jiwonkkang.github.io/css/gitalk.css'>
+<script src='https://jiwonkkang.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '5a1c911a3bb5ff14fe5e',
+    clientSecret: '8586a43d9a15967e4760ef333ef31eab72c6d3ea',
+    repo: 'jiwonkkang.github.io',
+    owner: 'JiwonKKang',
+    admin: ['JiwonKKang'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://jiwonkkang.github.io/">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://jiwonkkang.github.io/js/github-style.js"></script>
+
+
+
+
+</html>

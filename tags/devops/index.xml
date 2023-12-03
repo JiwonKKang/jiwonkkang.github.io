@@ -9,10 +9,10 @@
     <lastBuildDate>Fri, 11 Aug 2023 09:25:40 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/devops/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>무중단 배포는 어떻게할까?</title>
-      <link>https://jiwonkkang.github.io/post/ci-cd/</link>
+      <link>https://jiwonkkang.github.io/post/dev-ops/ci-cd/</link>
       <pubDate>Fri, 11 Aug 2023 09:25:40 +0900</pubDate>
       
-      <guid>https://jiwonkkang.github.io/post/ci-cd/</guid>
+      <guid>https://jiwonkkang.github.io/post/dev-ops/ci-cd/</guid>
       <description>여러가지 배포의 종류를 알아보자</description>
     </item>
     

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='https://jiwonkkang.github.io/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/frameworks.min.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/github.min.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/github-style.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/light.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/dark.css' />
+    <link rel="stylesheet" href='https://jiwonkkang.github.io/css/syntax.css' />
+    <title>Docker란 무엇일까? - Jiwon&#39;s blog</title>
+    
+    <link rel="icon" type="image/x-icon" href='https://jiwonkkang.github.io/images/favicon.ico'>
+    
+    <meta name="theme-color" content="#1e2327">
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RHFSNZ7DGH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RHFSNZ7DGH');
+</script>
+    
+    <meta name="description"
+  content="Docker 파헤치기" />
+<meta name="keywords"
+  content='' />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="https://jiwonkkang.github.io/post/dev-ops/what-docker/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Docker란 무엇일까? - Jiwon&#39;s blog" />
+<meta name="twitter:description"
+  content="Docker 파헤치기" />
+<meta name="twitter:site" content="https://jiwonkkang.github.io/" />
+<meta name="twitter:creator" content="" />
+<meta name="twitter:image"
+  content="https://jiwonkkang.github.io/">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Docker란 무엇일까? - Jiwon&#39;s blog">
+<meta property="og:description"
+  content="Docker 파헤치기" />
+<meta property="og:url" content="https://jiwonkkang.github.io/post/dev-ops/what-docker/" />
+<meta property="og:site_name" content="Docker란 무엇일까?" />
+<meta property="og:image"
+  content="https://jiwonkkang.github.io/">
+<meta property="og:image:width" content="2048">
+<meta property="og:image:height" content="1024">
+
+<meta property="article:published_time" content="2023-08-14 11:27:47 &#43;0900 KST" />
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="https://jiwonkkang.github.io/">
+        <svg class="octicon" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd"
+            d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          <form target="_blank" action="https://www.google.com/search" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+              <input type="hidden" name="q" value="site:https://jiwonkkang.github.io/">
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="https://jiwonkkang.github.io/">
+        <svg class="octicon octicon-mark-github v-align-middle" height="32" viewBox="0 0 16 16" version="1.1"
+          width="32">
+          <path fill-rule="evenodd"
+            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+          </path>
+        </svg>
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+  
+<div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="https://jiwonkkang.github.io/">
+                  <img class=" avatar-user"
+                    src="https://jiwonkkang.github.io/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="https://jiwonkkang.github.io/">JiwonKKang</a></span><span
+                    class="path-divider">/</span><strong class="css-truncate-target mr-1" style="max-width: 410px"><a
+                      href="https://jiwonkkang.github.io/post/dev-ops/what-docker/">Docker란 무엇일까?</a></strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Mon, 14 Aug 2023 11:27:47 &#43;0900"
+                    class="no-wrap">
+                    Mon, 14 Aug 2023 11:27:47 &#43;0900</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Tue, 15 Aug 2023 12:45:47 &#43;0900"
+                    class="no-wrap">
+                    Tue, 15 Aug 2023 12:45:47 &#43;0900</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      2605 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                    
+                    <a class="muted-link mr-3" href="/tags/docker">
+                      <svg class="octicon octicon-tag" viewBox="0 0 16 16" version="1.1" width="16" height="16">
+                        <path fill-rule="evenodd"
+                          d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z">
+                        </path>
+                      </svg>
+                      docker
+                    </a>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h1 id="도커를-알아보자">도커를 알아보자</h1>
+<blockquote>
+<h2 id="왜-docker">왜 Docker?</h2>
+</blockquote>
+<p>우선 Docker는 프로세스를 격리하기 위한 소프트웨어입니다.</p>
+<p>도커 이전에는 어떻게 프로세스를 격리했을까? 바로 VM을 통해</p>
+<p><img src="https://cdn.ttgtmedia.com/rms/onlineimages/virtual_machines-h_half_column_mobile.png" alt=""></p>
+<p>위와같은 방법으로 프로세스를 격리했습니다. 하지만 위 이미지에서 보는 바와같이 VM은</p>
+<p>어플리케이션 - Guest OS - Hypervisor - Host OS - 물리머신</p>
+<p>단계를 거치면서 동작하기 떄문에 무겁고 성능문제가 발생합니다.</p>
+<p>그래서 하이퍼바이저 없이 프로세스를 격리할수있는 방법 Docker를 사용하기시작했습니다.</p>
+<blockquote>
+<h2 id="chroot">Chroot</h2>
+</blockquote>
+<ul>
+<li>시스템의 root를 임의로 구성한 위치로 binding하는 명령어</li>
+</ul>
+<p>chroot로 루트를 변경한다는 게 어떤 의미인지 알아보겠습니다. chroot는 <code>Change Root Directory</code>의 줄임말로 명령어 자체가 루트 디렉터리를 바꾼다는 뜻을 가지고 있습니다. 시스템의 일반적인 파일 구조를 생각해보겠습니다.</p>
+<p><img src="https://d2uleea4buiacg.cloudfront.net/files/00f/00f9ffd1238f179b700c99745803fb4a51571bff0b7295f12b838560d69bf17f.m.png" alt=""></p>
+<p>시스템에는 <code>/</code>라고 일컬어지는 루트 디렉터리가 존재합니다.* 이 루트 디렉터리는 파일 시스템의 최상위를 의미하는 특별한 위치이며, 모든 디렉터리와 파일은 이 루트 디렉터리 아래에 존재합니다.</p>
+<p><img src="https://d2uleea4buiacg.cloudfront.net/files/e93/e93a9e5defffdbde2cdb83d2e75787834357c3a4c280cd18d7730ce5685f6b5c.m.png" alt=""></p>
+<p>루트 디렉터리 아래에 A, B, C 그리고 다시 A 아래에 D, E 요소가 있는 구조를 생각해보겠습니다. 위 그림에서 확인할 수 있듯이 모든 요소는 루트 아래에 존재하게 됩니다. 이 시스템 위에서 어떤 프로세스 R을 실행했다고 해보겠습니다.</p>
+<p><img src="https://d2uleea4buiacg.cloudfront.net/files/223/223215ac51b332401bf55ad083ae10afcecbca25e7a4e18deafb76d1cbf75820.m.png" alt=""></p>
+<p>이 프로세스 R은 기본적으로 루트 디렉터리를 기준으로 다른 파일들을 탐색할 수 있습니다. 예를 들어 프로세스 아래에서 A 아래의 E 파일에 접근하고자 한다면 <code>/A/E</code>와 같이 접근할 수 있습니다. 우리가 실행하는 프로세스들은 기본적으로 이러한 방식으로 파일 시스템에 접근합니다. 즉, 일반적인 프로세스는 파일 시스템의 <code>/</code>를 루트 디렉터리로 하는 프로세스라고 말할 수 있습니다.</p>
+<p>chroot는 바로 이 루트 디렉터리 <code>/</code>를 다른 위치로 지정해서 프로세스를 실행해주는 프로그램입니다. 여기서 아주 중요한 사실이 있습니다. 루트 디렉터리를 파일 시스템의 최상위 요소인 <code>/</code>으로 지정하지 않는다면, 결국 <code>/</code> 아래의 어떤 디렉터리만이 새로운 루트가 될 수 있다는 점입니다. 예를 들어 A를 루트 디렉터리로 하는 프로세스 K를 생각해보겠습니다.</p>
+<p><img src="https://d2uleea4buiacg.cloudfront.net/files/a77/a77b00d3bd5ae17c1fa41357d3fb98d15155426e045819117945cf44ac159698.m.png" alt=""></p>
+<p>chroot를 사용해 실행된 프로세스 K의 루트 디렉터리는 더 이상 <code>/</code>이 아닙니다. <code>/A</code>가 루트 디렉터리가 됩니다. 여기서 프로세스 R과 아주 중요한 차이가 발생합니다. 프로세스 R은 <code>/</code>를 기준으로 그 아래의 모든 파일을 탐색할 수 있었습니다. 하지만 프로세스 K의 루트 디렉터리는 <code>/A</code>이기 때문에 <code>/</code>에 접근하는 것이 불가능합니다. 그리고 <code>/</code> 아래에 있는 B와 C에도 접근할 수 없습니다. 왜냐면 프로세스 K에게는 <code>/A</code>가 최상위 디렉터리, 즉 <code>/</code>이기 때문에 그 위에 있는 경로를 표현할 방법 자체가 없습니다.</p>
+<p>이처럼 루트 디렉터리를 변경하면 특정 프로세스(K)가 상위 디렉터리에 접근할 수 없도록 격리 시킬 수 있습니다. 정확히 이 역할을 하는 것이 chroot 명령어입니다.</p>
+<p>하지만 chroot 명령어에는 약점이있습니다.</p>
+<ol>
+<li>탈옥이 가능하다.</li>
+<li>완전한 격리가 불가능하다. (Host의 filesystems, network 등에 접근 가능)</li>
+<li>root 권한 사용 가능하다.</li>
+<li>host의 자원을 무제한으로 사용할 수 있다.</li>
+</ol>
+<p>그래서 Docker에서 프로세스를 격리할때는 1번 약점을 보완한 pivot_root라는 명령어를 사용합니다.</p>
+<!-- raw HTML omitted -->
+<blockquote>
+<h2 id="pivot_root">Pivot_root</h2>
+</blockquote>
+<ul>
+<li>pivrot_root란 root 파일시스템의 마운트 포인트를 변경함으로써 특정 디렉토리를 새로운 루트 디렉토리로 만드는 명령어</li>
+</ul>
+<p>앞서 chroot로 만든 격리공간은 root 파일시스템이 동일하였기 때문에 탈옥이 가능했던 한편, pivrot_root를 이용하면 root 파일시스템의 마운트 포인트 자체가 변경되기 때문에 탈옥 자체가 불가능합니다.</p>
+<p><img src="https://user-images.githubusercontent.com/42667951/158943948-ed774866-9d7c-4b51-927f-58c38a193625.png" alt="158943948-ed774866-9d7c-4b51-927f-58c38a193625.png"></p>
+<p><em>예제</em></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir jail <span class="c1"># 격리공간 생성</span>
+</span></span><span class="line"><span class="cl">mount -n -t tmpfs -o <span class="nv">size</span><span class="o">=</span>800M none ./jail/ <span class="c1"># 파일시스템 800MB 마운트</span>
+</span></span><span class="line"><span class="cl">df -h <span class="c1"># 파일시스템 마운트 확인</span>
+</span></span><span class="line"><span class="cl">cp -r /bin jail/          <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">mkdir -p jail/usr         <span class="c1"># 명령어를 사용하기 위한 파일들 cp</span>
+</span></span><span class="line"><span class="cl">cp -r /usr/bin jail/usr/  <span class="c1"># </span>
+</span></span><span class="line"><span class="cl">cp -r .* jail/            <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">unshare -m <span class="c1"># 사용자 공간 분리</span>
+</span></span><span class="line"><span class="cl">mkdir old_root <span class="c1"># 루트 디렉토리를 마운트시킬 디렉토리 생성</span>
+</span></span><span class="line"><span class="cl">pivot_root . old_root/ 
+</span></span><span class="line"><span class="cl"><span class="c1"># 현재 디렉토리를 루트디렉토리로 변경하고 원래 루드디렉토리를 old_root에 마운트</span>
+</span></span><span class="line"><span class="cl">umount -l old_root <span class="c1"># old_root 마운트 해제</span>
+</span></span></code></pre></div><!-- raw HTML omitted -->
+<blockquote>
+<h2 id="namespaces">Namespaces</h2>
+</blockquote>
+<p>VM에서는 각 게스트 머신별로 독립적인 공간을 제공하고 서로가 충돌하지 않도록 하는 기능을 갖고 있습니다. 리눅스에서는 이와 동일한 역할을 하는 namespaces 기능을 커널에 내장하고 있습니다. 글을 쓰는 시점을 기준으로 현재 리눅스 커널에서는 다음 6가지 namespace를 지원하고 있습니다:</p>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<h3 id="mount-namespace">Mount namespace</h3>
+<ul>
+<li>Linux에서 파일 시스템을 사용하기 위해서는 마운트가 필요합니다. 마운트란 컴퓨터에 연결된 기기나 기억장치를 OS에 인식시켜 이용 가능한 상태로 만드는 것을 말한다.</li>
+<li>호스트 파일시스템에 구애받지 않고 독립적으로 파일시스템을 마운트하거나 언마운트 가능합니다.</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<h3 id="uts-namespace">UTS namespace</h3>
+<ul>
+<li>namespace 별로 호스트명이나 도메인명을 독자적으로 가질 수 있습니다.</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<h3 id="ipc-namespace">IPC namespace</h3>
+<ul>
+<li>프로세스 간의 통신(IPC) 오브젝트를 namespace별로 독립적으로 가질 수 있다. IPC는 System V 프로세스 간의 통신 오브젝트라고 하는 공유 메모리나 세마포어/메시지 큐를 말합니다. 세모포어란 프로세스가 요구하는 자원 관리에 이용되는 베타제어 장치이며, 메시지 큐란 여러 플세스간에서 비동기통신을 할 떄 사용되는 큐잉 장치입니다.</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<h3 id="pid-namespace">PID namespace</h3>
+<ul>
+<li>PID란 Linux에서 각 프로세스에 할당된 고유한 ID를 말합니다. PID namespace는 PID와 프로세스를 격리시킵니다. namespace가 다른 프로세스끼리는 서로 엑세스 할 수 없습니다.</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<h3 id="net-namespace">Net namespace</h3>
+<ul>
+<li>네트워크 디바이스, IP 주소, 포트 번호, 라우팅 테이블, 필터링 테이블 등과 같은 네트워크 리소스를 격리된 namespace마다 독립적으로 가질 수 있습니다. 이 기능을 사용하면 호스트 OS 상에서 사용중인 포트가 있더라도 컨테이너 안에서 동일한 번호의 포트를 사용할 수 있습니다.</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<h3 id="user-namespace">User namespace</h3>
+<ul>
+<li>독립적인 사용자를 할당합니다.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h2 id="cgroups">Cgroups</h2>
+</blockquote>
+<ul>
+<li>Control Groups의 약자로 프로세스들이 사용할 수 있는 컴퓨팅 자원들을 제한하고 격리시킬 수 있는 리눅스 커널의 기능이다. namespace와 더불어 도커 컨테이너에서 완벽한 격리 환경을 만드는 데에 쓰이는 중요한 기능이다. cgroup를 이용하면 다음 자원들을 제한할 수 있다
+<ul>
+<li>메모리</li>
+<li>CPU</li>
+<li>Network</li>
+<li>Device</li>
+<li>I/O</li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p>cgroups 은 컴퓨터의 자원(CPU, 메모리, network, storage I/O)가 각 프로세스 별로 독립적으로 격리되어 할당한다.
+ <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbCR0JD%2Fbtq6CABwrdM%2F5fnxMb34lUQwDhC6VImUk0%2Fimg.png" alt=""></p>
+</li>
+<li>
+<p>cgroups는 계층 구조를 사용하여 프로세스를 그룹화하여 관리할 수 있다. 예를 들어 사용자 애플리케이션과 서버와 같은 데몬 프로세스를 나눠, 각각의 그룹에 CPU 사용량을 할당할 수 있다.</p>
+</li>
+</ul>
+<p><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbRTEP9%2FbtqRwbiSoqV%2FYJ1fm1HMTMrWYwSNO6T6YK%2Fimg.png" alt=""></p>
+<!-- raw HTML omitted -->
+<blockquote>
+<h2 id="정리">정리</h2>
+</blockquote>
+<ol>
+<li><del>탈옥이 가능하다</del> -&gt; Pivot_root로 해결이 가능</li>
+<li><del>완전한 격리가 불가능 (Host의 filesystems, network 등에 접근 가능)</del> -&gt; net namespace로 해결 가능</li>
+<li><del>root 권한 사용 가능</del> -&gt; user namespace로 해결 가능</li>
+<li><del>host의 자원을 무제한으로 사용</del> -&gt; Cgroups로 해결 가능</li>
+</ol>
+<!-- raw HTML omitted -->
+<p>이 처럼 Linux에서 제공하는 기능들을 사용하여 프로세스의 완전한 격리를 할수 있게됩니다.</p>
+<hr>
+<h2 id="reference"><strong>reference</strong></h2>
+<p><a href="https://www.44bits.io/ko/post/change-root-directory-by-using-chroot">https://www.44bits.io/ko/post/change-root-directory-by-using-chroot</a></p>
+</article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='https://jiwonkkang.github.io/js/toc.js'></script>
+<link rel="stylesheet" href='https://jiwonkkang.github.io/css/toc.css' />
+
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='https://jiwonkkang.github.io/css/gitalk.css'>
+<script src='https://jiwonkkang.github.io/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '5a1c911a3bb5ff14fe5e',
+    clientSecret: '8586a43d9a15967e4760ef333ef31eab72c6d3ea',
+    repo: 'jiwonkkang.github.io',
+    owner: 'JiwonKKang',
+    admin: ['JiwonKKang'],
+    id: eval("location.pathname"), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="https://jiwonkkang.github.io/">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+</body>
+
+<script type="application/javascript" src="https://jiwonkkang.github.io/js/github-style.js"></script>
+
+
+
+
+</html>
