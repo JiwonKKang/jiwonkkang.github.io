@@ -6,7 +6,16 @@
     <description>Recent content in spring on Jiwon&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko</language>
-    <lastBuildDate>Fri, 18 Aug 2023 20:53:42 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Dec 2023 18:29:27 +0900</lastBuildDate><atom:link href="https://jiwonkkang.github.io/tags/spring/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[ Spring ] - Controller의 파라미터 바인딩에 대해서</title>
+      <link>https://jiwonkkang.github.io/post/%EC%8A%A4%ED%94%84%EB%A7%81-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98/</link>
+      <pubDate>Mon, 11 Dec 2023 18:29:27 +0900</pubDate>
+      
+      <guid>https://jiwonkkang.github.io/post/%EC%8A%A4%ED%94%84%EB%A7%81-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0-%EC%96%B4%EB%85%B8%ED%85%8C%EC%9D%B4%EC%85%98/</guid>
+      <description>Spring의 Controller단에서 사용되는 어노테이션과 파라미터 바인딩에 대해서 알아보자</description>
+    </item>
+    
     <item>
       <title>[Docker] Dockerfile - SpringBoot </title>
       <link>https://jiwonkkang.github.io/post/dev-ops/docker-image-spring/</link>
